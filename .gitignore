@@ -1,0 +1,13 @@
+
+/models/*
+/workspace/classify_image/images/*
+/workspace/custom_classify_image/images/*
+/workspace/custom_classify_image/models/*
+/workspace/custom_classify_image/*.txt
+/workspace/datasets/cifar-10-batches-bin/*
+/workspace/datasets/cifar-10-binary.tar.gz
+/workspace/datasets/images/*
+/workspace/mnist/MNIST_data/*
+
+*.pyc
+.DS_Store
