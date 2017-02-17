@@ -9,5 +9,7 @@
 /workspace/datasets/images/*
 /workspace/mnist/MNIST_data/*
 
+**/__pycache__/*
+
 *.pyc
 .DS_Store

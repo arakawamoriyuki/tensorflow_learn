@@ -3,7 +3,6 @@
 
 import os
 import glob
-from itertools import izip
 
 
 list_dirs = {

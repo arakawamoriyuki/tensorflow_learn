@@ -254,7 +254,7 @@ if __name__ == '__main__':
                 images_placeholder: train_image,
                 labels_placeholder: train_label,
                 keep_prob: 1.0})
-            print "step %d, training accuracy %g"%(step, train_accuracy)
+            print("step %d, training accuracy %g"%(step, train_accuracy))
 
             # 1 step終わるたびにTensorBoardに表示する値を追加する
             summary_str = sess.run(summary_op, feed_dict={
@@ -264,10 +264,11 @@ if __name__ == '__main__':
             summary_writer.add_summary(summary_str, step)
 
     # 訓練が終了したらテストデータに対する精度を表示
-    print "test accuracy %g"%sess.run(acc, feed_dict={
+    print("test accuracy %g"%sess.run(acc, feed_dict={
         images_placeholder: test_image,
         labels_placeholder: test_label,
-        keep_prob: 1.0})
+        keep_prob: 1.0
+    }))
 
     # 最終的なモデルを保存
     save_path = saver.save(sess, FLAGS.model)

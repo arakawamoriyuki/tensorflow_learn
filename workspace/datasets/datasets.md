@@ -21,7 +21,10 @@ http://www.buildinsider.net/small/booktensorflow/0201
 
 ## download cifar-10-binary
 
-https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz
+```
+curl -O https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz
+tar zxf
+```
 
 ## run
 

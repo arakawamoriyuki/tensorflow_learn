@@ -1,5 +1,7 @@
 # ロジスティック回帰
 
+TODO: python3 not working
+
 http://enakai00.hatenablog.com/entry/2016/02/29/121321
 2値分類
 

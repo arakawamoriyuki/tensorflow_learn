@@ -1,5 +1,7 @@
 # tensorflow image custom classify
 
+TODO: python3 cv2 ImportError
+
 ## what is this?
 
 画像をtensorflowを用いて独自に定義した分類を判定する
