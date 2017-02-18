@@ -23,7 +23,7 @@ http://www.buildinsider.net/small/booktensorflow/0201
 
 ```
 curl -O https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz
-tar zxf
+tar zxf cifar-10-binary.tar.gz
 ```
 
 ## run
