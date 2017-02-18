@@ -4,8 +4,11 @@
 ----------
 ## week1
 
+### 1 Introduction
 
-### 機械学習の定義
+[lecture-slides1 pdf](https://d3c33hcgiwev3.cloudfront.net/_974fa7509d583eabb592839f9716fe25_Lecture1.pdf?Expires=1487548800&Signature=ePccut9XD5ZVv0GzM13mY2vCzfddpTptfLEbifH~5icLwwUA7k7K97jd7WK5~J9JcT3Mg37I9oQ3gDqGOtS4cwzD2lmJDorAbjOpiAhxNP11-MiHlp-SAxa7KtctdlOdcH-J14xkPLyIECUxp9PMtKzJZl05rQnwFD6IOgKrxzg_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
+#### 機械学習の定義
 t
   タスク、クラス(分類)値、2値なら0or1
 p
@@ -14,7 +17,7 @@ e
   経験
 
 
-### 教師あり学習 supervised
+#### 教師あり学習 supervised
 
 回帰問題
   面積から住宅の価格予測
@@ -26,7 +29,7 @@ e
 
 n値分類に対応したアルゴリズム、サポートベクタマシンもある
 
-### 教師なし学習 unsupervised
+#### 教師なし学習 unsupervised
 
 答えが割り振られてないデータセットで学習
 
@@ -43,7 +46,11 @@ n値分類に対応したアルゴリズム、サポートベクタマシンも�
 octaveは学習、試作に良い
 
 
-### 線形回帰
+### 2 Model and Cost Function
+
+[lecture-slides2 pdf](https://d3c33hcgiwev3.cloudfront.net/_ec21cea314b2ac7d9e627706501b5baa_Lecture2.pdf?Expires=1487548800&Signature=CJ1SDVqhdnvZQO3RErtrq5TJer2B1OKsAQ8Tgr9Me30dIte15btdbZNU~eQ9zV-qP8IPR6FMqMERCiLgcYv58onN0qKGaRGDKu19er8~u4~D3lScBENggWXgsTqlTHp6nhDfZSJPxDElw~POpXLHbpZkYnL9S4~sYmEaZ3F-s0k_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
+#### 線形回帰
 
 m = 訓練サンプル数
 x = 入力変数、特徴
@@ -62,7 +69,7 @@ y = h(x)
 初歩の初歩
 
 
-### 目的関数、コスト関数
+#### 目的関数、コスト関数
 
 theta(シータ) = θiはモデルのパラメータ
 θ0は開始地点
@@ -187,7 +194,8 @@ puts "minimize θ1 = #{min_θ1}"
 今回(今後)のJ(θ0, θ1)は三次元プロット、または等高線図で図を表現する
 
 
-### 最急降下法
+#### 最急降下法
+
 gradient descent method?
 
 minmize J(θ0, θ1)
@@ -230,8 +238,53 @@ JでΘを最小化したい場合
 
 だとΘ0に代入後にΘ1を(Θ0に依存した式で)求めることになってしまう。
 
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/xAQBlqaaEeawbAp5ByfpEg_24e9420f16fdd758ccb7097788f879e7_Screenshot-2016-11-09-08.36.49.png?expiry=1487548800000&hmac=d7L9YI5t8Zo49Z9BIIn02U6JJhdzz-un6V-JT-ZRDws)
 
-### 偏導関数(partial derivatives)
+#### 導関数項
+
+わかりやすくするため、導関数項をh(θ1)だけで考える
+θ1 = θ1 - a(d/θ1×d), J(θ1)
+微分とはこの場合、J(θ1)のボウル型曲線グラフの現在地に接続する一次関数の線を引き、その傾きが何かということ
+その線が正の傾きであればa(d/θ1×d)は何か正の数になり、左に移動する。
+負の傾きなら負の数になり、右に移動する。
+そうして最小値に近づける
+
+学習率aについて考える
+学習率が小さいと時間がかかるが、大きすぎると逆に最小値から遠ざかる恐れがある
+
+最小値になると導関数項、微分は0となり、その場にとどまる
+学習率の調整は重要
+
+#### 線形回帰
+
+最急降下法と二乗誤差のコスト関数を使って作る。
+
+線形回帰の3dグラフは必ずボウル型になる。
+今まで見た山と丘がある3dにはならない。
+凸型関数という。局所的最適解はない。必ず一つの底に行き着く。
+最急降下法はバッチアルゴリズムと呼ばれる場合もある。
+
+ポイント
+- 局所的最適解はなく、一つの底だけ。ただし、目的関数Jが変わると底が複数になり、その限りではない。
+- aは固定でも底に収束する。ただし、大きすぎると無理。
+
+
+```math
+\begin{align*} \text{repeat until convergence: } \lbrace & \newline \theta_0 := & \theta_0 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}(h_\theta(x_{i}) - y_{i}) \newline \theta_1 := & \theta_1 - \alpha \frac{1}{m} \sum\limits_{i=1}^{m}\left((h_\theta(x_{i}) - y_{i}) x_{i}\right) \newline \rbrace& \end{align*}
+```
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/QFpooaaaEea7TQ6MHcgMPA_cc3c276df7991b1072b2afb142a78da1_Screenshot-2016-11-09-08.30.54.png?expiry=1487548800000&hmac=Q7Yegaz3dmYHZvOARbW5dHxYz3VsT8Cz-oX6GY3Pa70)
+
+
+#### 数式まとめ
+h = 仮説関数
+h(xi) = hΘ(xi) = θ0 + (θ1 * xi)
+j = 目的関数 = 最小を求める
+j(Θ0, Θ1) = 1/2m((hΘ(xi) - yi)**2)
+
+
+### 3 Linear Algebra Review
+TODO
 ----------
 
 
