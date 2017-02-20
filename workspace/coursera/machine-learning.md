@@ -321,7 +321,7 @@ Aij = A配列のi index内のj index
     y1 = 1
     y3 = 3
 
-各プログラミング言語と同じで、start indexが0だったり1だったりする
+各プログラミング言語と同じで、start indexが0だったり1だったりする
 数学的には1indexが一般、機械学習の実装時には0が主流
 これよりのちは1indexで説明している
 
@@ -393,8 +393,9 @@ Aij = A配列のi index内のj index
 
 上記の例で言えば、返される予測価格は4次元メトリクス(ベクトル?)になる。
 
-ベクトルは1次元配列
-メトリクスは2次元配列
+スカラ = 実数 (eg. 10.0)
+ベクトル = 1次元配列 (eg. [1, 2, 3])
+メトリクス = 2次元配列 (eg. [[1, 2], [3, 4], [5, 6]])
 
 #### メトリクスとメトリクスの乗算
 
@@ -596,9 +597,34 @@ Pythonのzip的な動き。Rubyでいう配列のtransposeメソッド。
 複数の線形回帰と線形回帰のベストプラクティス
 Octave and MATLAB
 
-### xxxxxx
+### Environment setup instructions
 
-TODO:
+#### install
+
+[GNU Octave 3.8.0](http://sourceforge.net/projects/octave/files/Octave%20MacOSX%20Binary/2013-12-30%20binary%20installer%20of%20Octave%203.8.0%20for%20OSX%2010.9.1%20%28beta%29/GNU_Octave_3.8.0-6.dmg/download)
+
+[MATLAB](https://www.mathworks.com/licensecenter/classroom/machine_learning_od/)
+* required mathworks login
+
+```
+$ vi ~/.zshrc
+
+## octave
+#
+alias octave='/usr/local/octave/3.8.0/bin/octave-3.8.0; exit;'
+
+$ octave
+```
+
+
+#### documents
+
+[Octave documents](http://www.gnu.org/software/octave/doc/interpreter/)
+[Octave(qiita)](http://qiita.com/tobira-code/items/7cc278da4e93555e9484)
+
+[MATLAB documents](http://jp.mathworks.com/help/matlab/)
+
+
 
 
 
