@@ -7,5 +7,8 @@ tensorflow学習履歴まとめ
 ## git clone
 
 ```
-git clone git@github.com:tensorflow/models.git
+git clone https://github.com/tensorflow/models.git
+git clone http://github.com/openai/gym
+git clone http://github.com/openai/universe
+git clone https://github.com/matthiasplappert/keras-rl.git
 ```

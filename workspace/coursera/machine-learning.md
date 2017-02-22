@@ -996,6 +996,13 @@ $ cd universe
 $ pip install -e .
 ```
 
+エラーが出る場合はgolangとvncdriverとか入れる。
+
+```
+$ brew install golang
+#TODO: vncdriver ?
+```
+
 ## keras-rl
 
 - tensorflowのDQN(強化学習?)深層学習ラッパー
@@ -1003,8 +1010,7 @@ $ pip install -e .
 [github](https://github.com/matthiasplappert/keras-rl)
 
 ```
-$ pip install keras-rl
-$ pip install h5py
+$ pip install keras-rl h5py
 $ git clone https://github.com/matthiasplappert/keras-rl.git
 $ cd keras-rl
 $ python examples/dqn_cartpole.py
