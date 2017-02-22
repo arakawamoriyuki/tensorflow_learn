@@ -1,7 +1,5 @@
 # tensorflow image custom classify
 
-TODO: python3 cv2 ImportError
-
 ## what is this?
 
 画像をtensorflowを用いて独自に定義した分類を判定する
@@ -17,6 +15,12 @@ TODO: python3 cv2 ImportError
 - 7:馬
 - 8:船
 - 9:トラック
+
+## versions
+
+- python      Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
+- tensorflow  v1.0.0
+- opencv3     3.1.0
 
 ## TODO
 
@@ -84,7 +88,9 @@ $ python run.py images/test/9/11.jpeg
 $ python run.py images/test/9/11.jpeg images/test/0/03.jpeg
 ```
 
-## TODO: tensorboard
+## tensorboard
+
+TODO: まだtensorflow v1でのtensorboard連携ができていない。
 
 ```
 $ tensorboard --logdir=/tmp/data

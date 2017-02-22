@@ -6,6 +6,11 @@
 データを用いて学習したGoogle製モデルinception-v3を利用して
 画像の内容とスコアを返す
 
+## versions
+
+- python      Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
+- tensorflow  v1.0.0
+
 ## documents
 
 - https://www.tensorflow.org/get_started/os_setup

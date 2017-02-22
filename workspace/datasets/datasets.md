@@ -15,6 +15,10 @@ cifar-10を利用した10クラスに分類されたデータセットを生成�
 - 8:船
 - 9:トラック
 
+## versions
+
+- python      Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
+
 ## documents
 
 http://www.buildinsider.net/small/booktensorflow/0201
