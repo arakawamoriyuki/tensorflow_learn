@@ -641,16 +641,18 @@ octaveはirb的な？octaveもビジュアライズ可能
   + [[1,3], [2,4]]これが、[1,3;2,4]こうなる
   + インデックスは1始まり
   + 配列のアクセスはv(1)
-  + v.^wはメトリクスの値を二乗する。v.*wは掛ける。
+  + v.^wはメトリクスの値を二乗する。v.* wは掛ける
   + v’はvのトランスポーズ。逆数。
   + Δ = デルタ = 差分 = d
   + グラフにおけるt1は最初の値。tnは最後の値。dtはプロット間隔
   + ベクトルの作成は2:0.2:3で2から0.2間隔で3までのベクトル作成
   + linspace関数でもベクトル作れる
 
-    a = [1,3;2,4]
-    b = 2:0.2:3
-    bt = b'
+```
+a = [1,3;2,4]
+b = 2:0.2:3
+bt = b'
+```
 
 - ビジュアライズ
   + plot関数にxとyを渡す。それぞれ型はベクトル
@@ -700,6 +702,7 @@ octaveはirb的な？octaveもビジュアライズ可能
 
 [Octave(qiita)](http://qiita.com/tobira-code/items/7cc278da4e93555e9484)を見るだけで問題ない
 
+
 #### 複数の変数、複数のフューチャーの線形回帰
 
 今までの家の広さだけでなく、ベッドルームの数や築年数も含めて学習する
@@ -744,6 +747,9 @@ a = 学習率
 
 
 #### octave 使い方
+
+[lecture-slides5 pdf](https://d3c33hcgiwev3.cloudfront.net/_41759bf2241607b07a5d4cd1285bff6b_Lecture5.pdf?Expires=1487894400&Signature=DBB0liAzvnnbS7yJKl-jVq6tWeJDc1QwrNfVLLauiFJ0~dwiwETFM1O1g3SYFkIotLctRqBjGw8ptw-jvjD5kOTSWyb7G0dg3FboUnPDSsfHSoX4~PHlJE7g043feWndrpZwmCHkgrFTZmNsc0ZDI9RzNDnY9Gg~aufhMHmGphE_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
 MALTABと基本的に一緒！
 
 - PS1コマンドで見やすく
@@ -758,10 +764,70 @@ MALTABと基本的に一緒！
 
 - A(:)でメトリクス全要素をベクトルで取得
 - A()はメトリクスへのアクセスで、代入も可能
-- .*など、ドットは各要素に対しての計算
+- ./など、ドットは各要素に対しての計算
 - lengthとonesを利用して各要素インクリメント。単純に+1でもいいけど
 - [v,i] = max(A)で、最大とそのインデックスをとれる
 
+- printでpng出力できる
+- figureで複数グラフ表示
+- imagescでカラーマップ表示
+
+```
+v=1:10
+for i=v,
+  disp(i);
+end;
+while i <= 5;
+  disp(i);
+  i = i + 1;
+end;
+while true;
+  disp(i);
+  if i == 10;
+    break;
+  elseif i < 10;
+    disp('i < 10');
+  else;
+    disp('else');
+  end;
+end;
+```
+
+- 関数は拡張子を.mにして読み込む
+
+```
+function y = myfunction(x)
+y = x^2;
+```
+
+```
+function [y1, y2] = myfunction(x)
+y1 = x^2;
+y2 = x^3;
+```
+
+- パスの追加可能
+
+```
+$ addpath('/Users/arakawa/Desktop')
+```
+
+- 関数の実行
+
+```
+$ [y1, y2] = myfunction(x)
+```
+
+#### octave ベクトル化
+
+すべての式はベクトル化して計算できるのであれば
+ループを使わずベクトル化して計算すべき
+
+- 線形回帰の例 hΘ(x) = ΘTx
+
+```
+prediction = theta' * x
+```
 
 ----------
 
