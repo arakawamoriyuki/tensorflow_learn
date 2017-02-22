@@ -1,4 +1,6 @@
 
+/gym/*
+/keras-rl/*
 /models/*
 /workspace/classify_image/images/*
 /workspace/custom_classify_image/images/*

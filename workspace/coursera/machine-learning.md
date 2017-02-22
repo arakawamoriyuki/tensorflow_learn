@@ -888,29 +888,61 @@ $ pip install --ignore-installed --upgrade $TF_BINARY_URL
 
 ## jupyter
 
+- pythonで実行可能なコードとその結果を併せて保存するwebページを起動する
+- anacondaはbundleされてるのでinstall必要なし
+
+```
+# install
+$ pip install jupyter
+# 起動
+$ jupyter notebook
+```
+
 ## matplotlib
+
+- pythonでグラフを表示する
+- anacondaはbundleされてるのでinstall必要なし
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+x = np.arange(-3, 3, 0.1)
+y = np.sin(x)
+plt.plot(x, y)
+plt.show() # jupyter notebookで実行する場合は必要なし
+```
 
 ## OpenAiGym
 
 - DQN(強化学習)評価用のプラットフォーム
 
 ```
-git clone http://github.com/openai/gym
-cd gym
-pip install -e .
+$ git clone http://github.com/openai/gym
+$ cd gym
+$ pip install -e .
 ```
 
 ## OpenAiUniverse
 
 ```
-git clone http://github.com.openai/universe.git
-cd universe
-pip install -e .
+$ git clone http://github.com/openai/universe
+$ cd universe
+$ pip install -e .
 ```
 
 ## keras-rl
 
-- tensorflowの深層学習ラッパー
+- tensorflowのDQN(強化学習?)深層学習ラッパー
+
+[github](https://github.com/matthiasplappert/keras-rl)
+
+```
+$ pip install keras-rl
+$ pip install h5py
+$ git clone https://github.com/matthiasplappert/keras-rl.git
+$ cd keras-rl
+$ python examples/dqn_cartpole.py
+```
 
 ----------------------------------------
 # TensorFlowで学ぶディープラーニング入門
