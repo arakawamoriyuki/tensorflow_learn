@@ -767,6 +767,152 @@ MALTABと基本的に一緒！
 
 
 ----------------------------------------
+# Tips
+
+## Anaconda in Python
+
+[参考](http://qiita.com/t2y/items/2a3eb58103e85d8064b6)
+
+- 主要ライブラリをオールインワンでインストール
+- condaというパッケージ管理システム入り(pipの代わり)
+- condaでバンージョン管理も可(pyenvの代わり)
+- condaで仮想環境管理も可(virtualenv/venの代わり)
+
+
+1. [anaconda](https://www.continuum.io/downloads#osx)公式からGUI(もしくはCUI)でインストール
+
+2. インストールした場所によるが(試した際はユーザーにインストール出来なかった)、インストールすると下記にnumpyなど機械学習に必要な環境が作られる。
+
+```
+/anaconda
+```
+
+```
+$ /anaconda/bin/python --version
+Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
+$ /anaconda/bin/pip list | grep numpy      # condaでパッケージ管理するのでpip入ってはいるけどconda通したほうが良い
+numpy (1.11.3)
+numpydoc (0.6.0)
+$ /anaconda/bin/conda list | grep numpy
+numpy                     1.11.3                   py27_0
+numpydoc                  0.6.0                    py27_0
+```
+
+3. 現system環境と競合(pythonコマンドなど)するので使いたいときだけPATH通したほうが良い。
+
+```
+$ vi ~/.zshrc
+```
+
+```
+## path functions
+#
+path_append ()  { path_remove $1; export PATH="$PATH:$1"; }
+path_prepend () { path_remove $1; export PATH="$1:$PATH"; }
+path_remove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }
+
+~~~
+
+## anaconda
+#
+ANACONDA_PATH = /anaconda/bin
+anaconda_active () {
+  path_prepend $ANACONDA_PATH
+}
+anaconda_deactive () {
+  path_remove $ANACONDA_PATH
+}
+```
+
+```
+$ python --version
+Python 2.7.11
+$ source ~/.zshrc
+$ anaconda_active
+$ python --version
+Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
+$ anaconda_deactive
+$ python --version
+Python 2.7.11
+```
+
+## OpenCV cv2
+
+- 画像や動画を加工するpythonのライブラリ
+- 線画にしたり顔を検出したり？
+- 機械学習では、CNN(畳み込みニューラルネットワーク)で、白黒や輪郭情報などの学習に必要な要素にフィルタしてデータを最適化する。
+
+```
+# anaconda環境前提
+$ conda install -c https://conda.anaconda.org/menpo opencv3
+$ python
+>>> import cv2
+>>> cv2.__version__
+'3.1.0'
+```
+
+## TensorFlow
+
+- 機械学習ライブラリ
+
+
+### install
+
+詳しくは[ここ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/get_started/os_setup.md#anaconda-installation)
+
+```
+# とりあえずsystem pipとかanaconda pipでinstallしてしまっていたら消しておく。
+$ pip uninstall tensorflow
+$ pip3 uninstall tensorflow
+
+# anaconda環境でcondaで作成した環境に対してtensorflowをinstall
+$ conda create -n tensorflow python=2.7
+$ source activate tensorflow
+(tensorflow)$ conda install -c conda-forge tensorflow
+(tensorflow)$ python
+>> import tensorflow as tf
+>> tf.__version__
+'1.0.0'
+
+# anaconda環境でグローバル環境に対して?tensorflowをinstall
+$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl # githubを参照！！ Mac OS X, CPU only, Python 2.7
+$ pip install --ignore-installed --upgrade $TF_BINARY_URL
+>> import tensorflow as tf
+>> tf.__version__
+'1.0.0'
+```
+
+## Chainer
+
+- 機械学習ライブラリ
+
+## jupyter
+
+## matplotlib
+
+## OpenAiGym
+
+- DQN(強化学習)評価用のプラットフォーム
+
+```
+git clone http://github.com/openai/gym
+cd gym
+pip install -e .
+```
+
+## OpenAiUniverse
+
+```
+git clone http://github.com.openai/universe.git
+cd universe
+pip install -e .
+```
+
+## keras-rl
+
+- tensorflowの深層学習ラッパー
+
+----------------------------------------
 # TensorFlowで学ぶディープラーニング入門
 
 ## TensorFlow入門
