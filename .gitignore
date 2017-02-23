@@ -10,6 +10,8 @@
 /workspace/datasets/cifar-10-batches-bin/*
 /workspace/datasets/cifar-10-binary.tar.gz
 /workspace/datasets/images/*
+/workspace/ml_1b/workspace/output/*
+/workspace/ml_1b/workspace/data/*
 /workspace/mnist/MNIST_data/*
 
 **/__pycache__/*
