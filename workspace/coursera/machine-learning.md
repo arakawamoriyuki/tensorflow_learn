@@ -921,6 +921,18 @@ $ python
 
 - 機械学習ライブラリ
 
+[画像分類](https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet)
+[画像分類 inception](https://github.com/tensorflow/models/tree/master/inception/inception)
+
+[画像キャプション](https://github.com/tensorflow/models/tree/master/im2txt)
+
+[自然言語CNN 畳み込みニューラルネットワーク](https://github.com/dennybritz/cnn-text-classification-tf)
+[RNN](https://github.com/tensorflow/models/tree/master/tutorials/rnn)
+[教師なし学習](https://github.com/tensorflow/models/tree/master/tutorials/embedding)
+
+keras-rl
+OpenAiGym
+OpenAiUniverse
 
 ### install
 
@@ -951,6 +963,11 @@ $ pip install --ignore-installed --upgrade $TF_BINARY_URL
 ## Chainer
 
 - 機械学習ライブラリ
+
+### Models
+
+[線画着色](https://hub.docker.com/r/liamjones/paintschainer-docker/)
+[イラスト生成](http://qiita.com/mattya/items/e5bfe5e04b9d2f0bbd47)
 
 ## jupyter
 
