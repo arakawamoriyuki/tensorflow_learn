@@ -1043,11 +1043,49 @@ $ cd universe
 $ pip install -e .
 ```
 
-エラーが出る場合はgolangとvncdriverとか入れる。
+* エラーが出る場合はエラー内容に従って下記をインストール
+* 公式のチュートリアルコードで、import universeする前にimport zbarlightする!(zbarlight必須)
+
+- appstoreからxcode update
+- docker
+- numpy (anacondaならbundle済み)
+- incremental (anacondaならbundle済み?)
+- golang
+- go-vncdriver
+- libjpeg-turbo
+- zbar(brew)
+- zbarlight(pip)
 
 ```
-$ brew install golang
-#TODO: vncdriver ?
+$ xcode-select --install
+$ pip install numpy incremental
+$ brew install libjpeg-turbo golang
+```
+
+### golang
+
+```
+$ brew install libjpeg-turbo golang
+$ vi ~/.zshrc
+## golang
+#
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+```
+
+### go-vncdriver
+
+```
+$ git clone https://github.com/openai/go-vncdriver.git
+$ cd go-vncdriver
+$ python build.py
+$ pip install -e .
+```
+
+### zbar
+
+```
+$ brew install zbar
+$ pip install zbarlight
 ```
 
 ## keras-rl

@@ -1,4 +1,5 @@
 
+/go-vncdriver/*
 /gym/*
 /universe/*
 /keras-rl/*
