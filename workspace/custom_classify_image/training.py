@@ -120,9 +120,10 @@ def loss(logits, labels):
 
     # 交差エントロピーの計算
     cross_entropy = -tf.reduce_sum(labels*tf.log(logits))
-    # TODO: tensorflow v1ではtf.scalar_summaryが定義されていない？
-    # TensorBoardで表示するよう指定。
-    # tf.scalar_summary("cross_entropy", cross_entropy)
+
+    # tf.scalar_summary("cross_entropy", cross_entropy) # tensorflow v0.12
+    tf.summary.scalar("cross_entropy", cross_entropy) # tensorflow v1.0
+
     return cross_entropy
 
 def training(loss, learning_rate):
@@ -153,8 +154,10 @@ def accuracy(logits, labels):
     """
     correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(labels, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-    # TensorBoardで表示するよう指定。# TODO: tensorflow v1ではscalar_summaryが定義されていない？
-    # tf.scalar_summary("accuracy", accuracy)
+
+    # tf.scalar_summary("accuracy", accuracy) # tensorflow v0.12
+    tf.summary.scalar("accuracy", accuracy) # tensorflow v1.0
+
     return accuracy
 
 if __name__ == '__main__':
@@ -236,11 +239,11 @@ if __name__ == '__main__':
             # 変数の初期化
             sess.run(tf.global_variables_initializer())
 
-        # TODO: tensorflow v1ではtf.merge_all_summariesが定義されていない？
-        # TODO: tensorflow v1ではtf.train.SummaryWriterが定義されていない？
-        # TensorBoardで表示する値の設定
-        # summary_op = tf.merge_all_summaries()
-        # summary_writer = tf.train.SummaryWriter(FLAGS.train_dir, sess.graph_def)
+        # summary_op = tf.merge_all_summaries() # tensorflow v0.12
+        summary_op = tf.summary.merge_all() # tensorflow v1.0
+
+        # summary_writer = tf.train.SummaryWriter(FLAGS.train_dir, sess.graph_def) # tensorflow v0.12
+        summary_writer = tf.summary.FileWriter(FLAGS.train_dir, sess.graph_def) # tensorflow v1.0
 
         # 訓練の実行
         for step in range(FLAGS.max_steps):
@@ -260,13 +263,12 @@ if __name__ == '__main__':
                 keep_prob: 1.0})
             print("step %d, training accuracy %g"%(step, train_accuracy))
 
-            # TODO: tensorflow v1ではtf.merge_all_summariesが定義されていない？
             # 1 step終わるたびにTensorBoardに表示する値を追加する
-            # summary_str = sess.run(summary_op, feed_dict={
-            #     images_placeholder: train_image,
-            #     labels_placeholder: train_label,
-            #     keep_prob: 1.0})
-            # summary_writer.add_summary(summary_str, step)
+            summary_str = sess.run(summary_op, feed_dict={
+                images_placeholder: train_image,
+                labels_placeholder: train_label,
+                keep_prob: 1.0})
+            summary_writer.add_summary(summary_str, step)
 
     # 訓練が終了したらテストデータに対する精度を表示
     print("test accuracy %g"%sess.run(acc, feed_dict={

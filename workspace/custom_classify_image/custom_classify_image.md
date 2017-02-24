@@ -90,8 +90,16 @@ $ python run.py images/test/9/11.jpeg images/test/0/03.jpeg
 
 ## tensorboard
 
-TODO: まだtensorflow v1でのtensorboard連携ができていない。
+- tensorboardの書き出し方はv1.0から変更されているので注意
+
+|v0.12|v1.0|
+|:---:|:---:|
+|tf.scalar_summary()|tf.summary.scalar()|
+|tf.merge_all_summaries()|tf.summary.merge_all()|
+|tf.train.SummaryWriter()|tf.summary.FileWriter()|
 
 ```
 $ tensorboard --logdir=/tmp/data
+or
+$ python /anaconda/lib/python2.7/site-packages/tensorflow/tensorboard/tensorboard.py --logdir=/tmp/data
 ```
