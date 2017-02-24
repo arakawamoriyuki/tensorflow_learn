@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 import gym
 import zbarlight # 公式のコードに追加!しないと動かない
+# import fastzbarlight
 import universe  # register the universe environments
 
 env = gym.make('flashgames.DuskDrive-v0')

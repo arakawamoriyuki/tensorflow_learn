@@ -1062,6 +1062,15 @@ $ pip install numpy incremental
 $ brew install libjpeg-turbo golang
 ```
 
+### docker
+
+- 最初だけの忘れがちコマンド
+
+```
+$ docker-machine create --driver virtualbox default
+$ docker-machine start default; eval "$(docker-machine env default)"
+```
+
 ### golang
 
 ```
@@ -1079,6 +1088,19 @@ $ git clone https://github.com/openai/go-vncdriver.git
 $ cd go-vncdriver
 $ python build.py
 $ pip install -e .
+```
+
+- 設定 zshrcに書いとく必要があるっぽい
+
+```
+## go-vncdriver
+#
+go_vncdriver_active () {
+  export GOPATH='/Users/arakawa/Documents/repository/tensorflow_learn/go-vncdriver/.build'
+  export CGO_CFLAGS='-I/Users/arakawa/anaconda/lib/python2.7/site-packages/numpy/core/include -I/Users/arakawa/anaconda/include/python2.7'
+  export CGO_LDFLAGS='/usr/local/opt/jpeg-turbo/lib/libjpeg.dylib -undefined dynamic_lookup'
+  export GO15VENDOREXPERIMENT='1'
+}
 ```
 
 ### zbar
