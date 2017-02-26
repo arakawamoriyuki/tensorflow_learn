@@ -1018,6 +1018,44 @@ $ [y1, y2] = myfunction(x)
 prediction = theta' * x
 ```
 
+#### octave演習
+
+[？]の関数を作ってsubmitコマンドで提出しろって事らしい。
+
+```
+ex1.m - エクササイズの手順を示すOctave / MATLABスクリプト
+ex1 multi.m - 練習の後半部分のOctave / MATLABスクリプト
+ex1data1.txt - 1つの変数を使用した線形回帰のデータセット
+ex1data2.txt - 複数の変数を使用した線形回帰のデータセット
+submit.m - ソリューションをGoogleのサーバーに送信する送信スクリプト
+[？] warmUpExercise.m - Octave / MATLABの簡単なサンプル関数
+[？] plotData.m - データセットを表示する関数
+[？] computeCost.m - 線形回帰のコストを計算する関数
+[？] gradientDescent.m - グラデーション降下を実行する関数
+[†] computeCostMulti.m - 複数変数のコスト関数
+[†] gradientDescentMulti.m - 複数変数のグラデーションディセント
+[†] featureNormalize.m - フィーチャを正規化する関数
+[†] normalEqn.m - 正規方程式を計算する関数
+```
+
+1. 次元の正方行列を返す関数を作れ
+
+```
+$ cd machine-leaning-ex1/ex1
+# edit warmUpExercise.m
+$ octave
+$ warmUpExercise
+# check return value
+$ submit
+```
+
+2. 1つの変数の線形回帰
+
+TODO
+
+```
+
+```
 
 ## week3
 

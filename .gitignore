@@ -5,6 +5,7 @@
 /keras-rl/*
 /models/*
 /pydata_okinawa2017/*
+/workspace/coursera/machine-learning-ex1/*
 /workspace/classify_image/images/*
 /workspace/custom_classify_image/images/*
 /workspace/custom_classify_image/models/*
