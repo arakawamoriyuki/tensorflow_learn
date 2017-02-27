@@ -10,9 +10,10 @@
 /workspace/custom_classify_image/images/*
 /workspace/custom_classify_image/models/*
 /workspace/custom_classify_image/*.txt
-/workspace/datasets/cifar-10-batches-bin/*
-/workspace/datasets/cifar-10-binary.tar.gz
-/workspace/datasets/images/*
+/workspace/datasets/imagenet/cifar-10-batches-bin/*
+/workspace/datasets/imagenet/cifar-10-binary.tar.gz
+/workspace/datasets/imagenet/images/*
+/workspace/datasets/imagenet/images/*
 /workspace/ml_1b/workspace/output/*
 /workspace/ml_1b/workspace/data/*
 /workspace/mnist/MNIST_data/*
