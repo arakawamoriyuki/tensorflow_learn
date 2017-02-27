@@ -723,7 +723,9 @@ jは特徴のインデックス
 多変量の線形回帰という。
 
 
-#### 最急降下法 gradient descent
+### 最急降下法 gradient descent
+
+[lecture-slides4 pdf](https://d3c33hcgiwev3.cloudfront.net/_7532aa933df0e5055d163b77102ff2fb_Lecture4.pdf?Expires=1488153600&Signature=LuL0lvZ4hPYhZwyZ2J0F2BwlImG8QgTZ02fhiUCyJ4os4Tn9DjGeIS4iIIumzqXMRLWFJ8yVvy0JP~EHhMU~ilP3PVsYsDGxCtN5jdNIxAS~WClBwc1me7w43D9oxMz8rh4ghdG3QOLeIWmZ8DzX2Rw7eE2K7QKZRpNUnARGieY_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
 
 TODO: 動画内の問題が理解できてない
 TODO: この節、動画は何度も見直した方が良い。完全に理解出来るまで。完全に理解できれば複数特徴の線形回帰の実装が出来る。
@@ -745,7 +747,7 @@ a = 学習率
 
 θi0 = 1で定義していたので新しいアルゴリズムは古いアルゴリズムと似ている、同じという認識。
 
-#####フューチャースケーリング
+####フューチャースケーリング
 
 複数の特徴を最急降下法で分析する場合、それぞれの値の単位を調整すると収束しやすくなる。
 例えば、ctrやimp,clickなど。ctrは1以下の値でclickは大きい数、またimpはそれより100倍近く大きい。
@@ -755,17 +757,43 @@ a = 学習率
 -3から3も経験上いい感じ。
 -0.3から0.3も。
 
-#####ミーンノーマライゼーション 平均ノーマライゼーション
+####ミーンノーマライゼーション 平均正則化
 
 だいたい2000feetの家のサイズなら、
-サイズに-1000して0へ平均化し、2000で割ってフューチャースケーリングする。
+サイズに-2000して0へ平均正則化し、-1000で割ってフューチャースケーリングする。
 
 μiはここでいう0へ平均化するために引く1000を表し、siは値としての平均である2000を表す（最大引く最小）。
 siは標準偏差を設定してもいい！
 
 ある程度スケーリングしたら大幅に収束しやすくなるのである完全でなくていい。
 
-##### 学習率 ラーニングレート
+
+例.
+
+|中期試験点数(x)|中期試験点数の二乗(x^2)|最終試験点数(y)|
+|:-:|:-:|:-:|
+|89|7921|96|
+|72|5184|74|
+|94|8836|87|
+|69|4761|78|
+
+中期試験点数の二乗をフューチャースケーリングと平均正則化を適用する
+
+```
+x_vector = [7921, 5184, 8836, 4761]
+
+max = 8836.0
+min = 4761.0
+avg = x_vector.reduce(:+) / x_vector.count # = 6675.0
+normalize = max - min # = 4075.0
+
+x_vector.each do |x|
+  puts "x(#{x}) => #{(x - avg) / normalize}"
+  x
+end
+```
+
+#### 学習率 ラーニングレート
 
 実際に学習させていくと、θは減少していく。
 100回目と200回目のθを調べる。
@@ -775,8 +803,139 @@ siは標準偏差を設定してもいい！
 0.001,0.003,0.01,0.03,0.1,0.3,1
 と範囲分けして、線引きしていくのがいい感じ！
 
+#### 適切なフィーチャーの選択
 
-#### octave 使い方
+必ずしも複数の特徴を使う必要はない。
+幅と奥行きなら、面積を使って1つの特徴とする事も出来る。
+下記のような二次関数は急激に上がっても後に下降してしまう。
+
+    hθ(x)=θ0+θ1(size)+θ2(size)
+
+なのでルートを使う事で奥に行くほど平坦な線をかける。
+
+    hθ(x)=θ0+θ1(size)+√θ2(size)
+
+1から1000のサイズのデータがあるならば、
+√1000=だいたい32なので
+
+    x1=size/1000, x2=√size/32
+
+でスケーリング出来る。
+この手法を多項式回帰という。
+
+#### 正規方程式 normal equation
+
+最急降下法と同じレイヤのアルゴリズム。
+
+仮説を立てて何度も計算する最急降下法とは違い、一発で手法を求める。
+
+
+求め方は偏微分=0とする方法。
+ここで、特徴のメトリクスXはX0に1がだ代入されている状態とする。
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/dykma6dwEea3qApInhZCFg_333df5f11086fee19c4fb81bc34d5125_Screenshot-2016-11-10-10.06.16.png?expiry=1488153600000&hmac=0N2kJ-rPoRQ6XnCk_CiYwN5Fx-gH48ckAORayv2yCYk)
+
+```
+θ = (X' * X)^-1 X'y
+```
+
+`(X' * X)^-1`は逆行列。octaveで書くと
+
+```
+pinv(x' * x) * x' * y
+```
+
+pinv関数は逆行列を計算する。
+正規方程式はフィーチャースケーリングをする必要はない。
+
+##### 最急降下法と正規方程式のメリットデメリット
+
+|最急降下法|正規方程式|
+|:-:|:-:|
+|学習率を選択しないといけない|学習率いらない、シンプル|
+|多くの繰り返しが必要|繰り返しもいらない、一発|
+|数百万の特徴があっても正しく動作する|特徴の数の3乗で計算処理が増える|
+|感覚的に10000個以上の特徴で使う|感覚的に10000個以下の特徴で使う|
+
+- 後に学習するロジスティック回帰や分類などのロジックでは正規方程式は実際にはうまくいかない場合がある。
+
+#### 正規方程式と非可逆性
+
+正規方程式を使う時に行列を逆行列にしてるけど、逆行列にできない特異行列だったらどうするの？
+それは滅多に遭遇しない問題ではあるが。
+
+octaveのpinv関数は正常に動作するように作られてる。(技術的な話になるので省略する)
+
+inv = インバース(逆行列)にする関数
+pinv = インバース(逆行列)にするが、目的のΘがちゃんと取れる関数
+
+特徴を選択する上で、feet(フィート)とm(メートル)があれば、片方を削除してもいい。
+同じような意味を持つ特徴は削除してもいい(すべき)。
+正規化を用いて特徴を絞る。正規化についてはweek後半に習う。
+
+多分、普通のメトリクスは下記が成り立つ。それを可逆性といい、それができない行列が非可逆性の行列という。
+
+```
+a == a''
+a == inv(inv(a))
+```
+
+まぁどちらにせよ、octaveなどのライブラリがpinv関数などを用意しているのでそれを利用するので問題ない。
+
+#### クイズ
+
+1. フィーチャースケーリング計算
+
+x(7921) => 0.3056441717791411
+x(5184) => -0.3660122699386503
+x(8836) => 0.5301840490797546
+x(4761) => -0.4698159509202454
+
+ansower = -0.37
+
+2. 次にとる行動として正解は？
+15回 線形回帰を実行
+a=0.3
+J(Θ)を計算
+J(Θ)は急速に減少し次にレベルオフ?
+
+ansower = より大きな値を試す
+結果 = x
+レベルオフ = 平坦になったって事っぽい。
+すでに平坦になっているなら正しい学習率なので0.3でOK
+
+3. 下記の次元数は何？
+n=3 #特徴数
+m=14 #教師データ個数
+
+ansower = X is 14×4, y is 14×1, θ is 4×1
+
+4. 最急降下法と正規方程式どっち？
+- m=1000000
+- n=200000
+- 多変量線形回帰
+
+ansower = 正規方程式で多変量は重いので最急降下法
+
+Gradient descent, since (XTX)−1 will be very slow to compute in the normal equation.
+
+5. フィーチャースケーリングする理由
+
+ansower = 反復回数を抑えられるので勾配降下を早める為
+It speeds up gradient descent by making it require fewer iterations to get to a good solution.
+
+
+#### (宿題の提出方法)
+
+- 問題の関数を作る
+- .mで保存してoctave上で関数が動作するか確認する
+- octave上でsubmitを実行
+- 何を提出するか聞かれるので数字を選択して提出する
+- メールアドレスとパスワードを入力すると送信され、すぐに答えが返る
+
+[提出方法やデバッグに関するヒント](https://www.coursera.org/learn/machine-learning/supplement/SFKpu/programming-tips-from-mentors)
+
+### octave 使い方
 
 [lecture-slides5 pdf](https://d3c33hcgiwev3.cloudfront.net/_41759bf2241607b07a5d4cd1285bff6b_Lecture5.pdf?Expires=1487894400&Signature=DBB0liAzvnnbS7yJKl-jVq6tWeJDc1QwrNfVLLauiFJ0~dwiwETFM1O1g3SYFkIotLctRqBjGw8ptw-jvjD5kOTSWyb7G0dg3FboUnPDSsfHSoX4~PHlJE7g043feWndrpZwmCHkgrFTZmNsc0ZDI9RzNDnY9Gg~aufhMHmGphE_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
 
@@ -858,6 +1017,49 @@ $ [y1, y2] = myfunction(x)
 ```
 prediction = theta' * x
 ```
+
+#### octave演習
+
+[？]の関数を作ってsubmitコマンドで提出しろって事らしい。
+
+```
+ex1.m - エクササイズの手順を示すOctave / MATLABスクリプト
+ex1 multi.m - 練習の後半部分のOctave / MATLABスクリプト
+ex1data1.txt - 1つの変数を使用した線形回帰のデータセット
+ex1data2.txt - 複数の変数を使用した線形回帰のデータセット
+submit.m - ソリューションをGoogleのサーバーに送信する送信スクリプト
+[？] warmUpExercise.m - Octave / MATLABの簡単なサンプル関数
+[？] plotData.m - データセットを表示する関数
+[？] computeCost.m - 線形回帰のコストを計算する関数
+[？] gradientDescent.m - グラデーション降下を実行する関数
+[†] computeCostMulti.m - 複数変数のコスト関数
+[†] gradientDescentMulti.m - 複数変数のグラデーションディセント
+[†] featureNormalize.m - フィーチャを正規化する関数
+[†] normalEqn.m - 正規方程式を計算する関数
+```
+
+1. 次元の正方行列を返す関数を作れ
+
+```
+$ cd machine-leaning-ex1/ex1
+# edit warmUpExercise.m
+$ octave
+$ warmUpExercise
+# check return value
+$ submit
+```
+
+2. 1つの変数の線形回帰
+
+TODO
+
+```
+
+```
+
+## week3
+
+### TODO:
 
 ----------
 
@@ -1062,6 +1264,15 @@ $ pip install numpy incremental
 $ brew install libjpeg-turbo golang
 ```
 
+### docker
+
+- 最初だけの忘れがちコマンド
+
+```
+$ docker-machine create --driver virtualbox default
+$ docker-machine start default; eval "$(docker-machine env default)"
+```
+
 ### golang
 
 ```
@@ -1079,6 +1290,19 @@ $ git clone https://github.com/openai/go-vncdriver.git
 $ cd go-vncdriver
 $ python build.py
 $ pip install -e .
+```
+
+- 設定 zshrcに書いとく必要があるっぽい
+
+```
+## go-vncdriver
+#
+go_vncdriver_active () {
+  export GOPATH='/Users/arakawa/Documents/repository/tensorflow_learn/go-vncdriver/.build'
+  export CGO_CFLAGS='-I/Users/arakawa/anaconda/lib/python2.7/site-packages/numpy/core/include -I/Users/arakawa/anaconda/include/python2.7'
+  export CGO_LDFLAGS='/usr/local/opt/jpeg-turbo/lib/libjpeg.dylib -undefined dynamic_lookup'
+  export GO15VENDOREXPERIMENT='1'
+}
 ```
 
 ### zbar
