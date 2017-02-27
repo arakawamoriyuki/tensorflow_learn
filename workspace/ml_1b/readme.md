@@ -1,6 +1,6 @@
-bazelでbuildしなくていい。(できなかった)
+- bazelでbuildしなくていい。(できなかった)
 
-
+```
 python lm_1b/lm_1b_eval.py --mode sample \
                            --prefix "I love that I" \
                            --pbtxt data/graph-2016-09-10.pbtxt \
@@ -27,7 +27,7 @@ python lm_1b/lm_1b_eval.py --mode dump_lstm_emb \
                            --ckpt 'data/ckpt-*' \
                            --sentence "I love who I am ." \
                            --save_dir output
-
+```
 
 ```
 import numpy as np
