@@ -3,7 +3,7 @@
 ## what is this?
 
 画像をtensorflowを用いて独自に定義した分類を判定する
-データセットは/workspace/datasets/datasets.mdをみてください
+データセットは/workspace/datasets/imagenet/readme.mdをみてください
 
 - 0:飛行機
 - 1:車
@@ -43,15 +43,15 @@ install
 
 ## datasets
 
-/workspace/datasets/datasets.md
+/workspace/datasets/imagenet/readme.md
 
 ## flow
 
-1. /workspace/datasets/datasets.mdを読みつつ10クラスに分類された画像をトレーニング用とテスト用を生成する
+1. /workspace/datasets/imagenet/readme.mdを読みつつ10クラスに分類された画像をトレーニング用とテスト用を生成する
 
 ```
-$ python ../datasets/convert_cifar10.py --file ../datasets/cifar-10-batches-bin/data_batch_1.bin --format jpeg --out ./images/train --length 1000
-$ python ../datasets/convert_cifar10.py --file ../datasets/cifar-10-batches-bin/test_batch.bin --format jpeg --out ./images/test --length 100
+$ python ../datasets/imagenet/convert_cifar10.py --file ../datasets/imagenet/cifar-10-batches-bin/data_batch_1.bin --format jpeg --out ./images/train --length 1000
+$ python ../datasets/imagenet/convert_cifar10.py --file ../datasets/imagenet/cifar-10-batches-bin/test_batch.bin --format jpeg --out ./images/test --length 100
 ```
 
 2. create_list_text.pyを実行してtrain.txtとtest.txtを生成
