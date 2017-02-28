@@ -1000,6 +1000,23 @@ prediction = theta' * x
 
 #### octave演習
 
+- グラフ表示エラー
+
+```
+$ octave
+> figure;
+gnuplot> set terminal aqua enhanced title "Figure 1" size 560 420  font "*,6.66667" dashlength 1
+                      ^
+         line 0: unknown or ambiguous terminal type; type just 'set terminal' for a list
+
+WARNING: Plotting with an 'unknown' terminal.
+No output will be generated. Please select a terminal with 'set terminal'.
+
+$ brew cask install xquartz
+$ brew cask install aquaterm
+$ brew uninstall gnuplot
+$ brew install gnuplot --with-aquaterm --with-x11
+```
 
 ```
 ex1.m - エクササイズの手順を示すOctave / MATLABスクリプト
