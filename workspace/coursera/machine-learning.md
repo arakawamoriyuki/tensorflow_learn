@@ -886,43 +886,23 @@ a == inv(inv(a))
 
 1. フィーチャースケーリング計算
 
-x(7921) => 0.3056441717791411
-x(5184) => -0.3660122699386503
-x(8836) => 0.5301840490797546
-x(4761) => -0.4698159509202454
-
-ansower = -0.37
-
 2. 次にとる行動として正解は？
 15回 線形回帰を実行
 a=0.3
 J(Θ)を計算
 J(Θ)は急速に減少し次にレベルオフ?
-
-ansower = より大きな値を試す
-結果 = x
 レベルオフ = 平坦になったって事っぽい。
-すでに平坦になっているなら正しい学習率なので0.3でOK
 
 3. 下記の次元数は何？
 n=3 #特徴数
 m=14 #教師データ個数
-
-ansower = X is 14×4, y is 14×1, θ is 4×1
 
 4. 最急降下法と正規方程式どっち？
 - m=1000000
 - n=200000
 - 多変量線形回帰
 
-ansower = 正規方程式で多変量は重いので最急降下法
-
-Gradient descent, since (XTX)−1 will be very slow to compute in the normal equation.
-
 5. フィーチャースケーリングする理由
-
-ansower = 反復回数を抑えられるので勾配降下を早める為
-It speeds up gradient descent by making it require fewer iterations to get to a good solution.
 
 
 #### (宿題の提出方法)
@@ -1020,7 +1000,6 @@ prediction = theta' * x
 
 #### octave演習
 
-[？]の関数を作ってsubmitコマンドで提出しろって事らしい。
 
 ```
 ex1.m - エクササイズの手順を示すOctave / MATLABスクリプト
