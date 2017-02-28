@@ -11,9 +11,12 @@
 /workspace/custom_classify_image/images/*
 /workspace/custom_classify_image/models/*
 /workspace/custom_classify_image/*.txt
-/workspace/datasets/images/cifar-10-batches-bin/*
-/workspace/datasets/images/cifar-10-binary.tar.gz
-/workspace/datasets/images/images/*
+/workspace/datasets/imagenet/cifar-10-batches-bin/*
+/workspace/datasets/imagenet/cifar-10-binary.tar.gz
+/workspace/datasets/imagenet/images/*
+/workspace/datasets/imagenet/images/*
+/workspace/datasets/translator/imagenet_synset_to_human_label_map.txt
+/workspace/datasets/translator/dest.txt
 /workspace/ml_1b/workspace/output/*
 /workspace/ml_1b/workspace/data/*
 /workspace/mnist/MNIST_data/*
