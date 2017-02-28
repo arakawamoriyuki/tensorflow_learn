@@ -11,12 +11,12 @@ $ python server.py
 
 ## localでログを捨てつつバックグラウンド実行
 
-- run
+### run
 ```
 $ python server.py > /dev/null 2>&1 &
 ```
 
-- kill
+### kill
 ```
 $ ps | grep python server.py
 $ kill -9 {pid}
@@ -24,13 +24,18 @@ $ kill -9 {pid}
 
 ## dockerで起動
 
-- build and run
+- linux
+- anaconda
+- tensorflow
+- bottle
+
+### build and run
 ```
 $ docker build --rm -t anaconda-bottle .
 $ docker run -d -p 8080:8080 --name anaconda-bottle anaconda-bottle
 ```
 
-- login
+### login
 ```
 $ docker exec -it anaconda-bottle bash
 ```
