@@ -14,7 +14,6 @@ def translate
     wait.until { driver.find_element(css: "#source") }.send_keys(english)
     wait.until { driver.find_element(css: "#gt-submit") }.click
     translated = wait.until {
-      elements = nil
       while 0 == driver.find_elements(css: "#result_box > span").count
         sleep RETRY_SLEEP
       end

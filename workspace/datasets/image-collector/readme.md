@@ -11,10 +11,9 @@ require './image-collector'
 
 SEARCH = ARGV[0] || '犬'
 
-image_collector SEARCH do |blob, index|
-  File.open("images/#{index}.jpg", 'wb') do |file|
-    file.write blob
-  end
+image_collector SEARCH do |save, index|
+  puts "#{dest}/#{index-1}.jpg"
+  save.call("#{dest}/#{index-1}.jpg")
 end
 ```
 
