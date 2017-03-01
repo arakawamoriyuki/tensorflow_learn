@@ -1000,7 +1000,7 @@ prediction = theta' * x
 
 #### octave演習
 
-- グラフ表示エラー
+##### グラフ表示エラー
 
 ```
 $ octave
@@ -1018,40 +1018,188 @@ $ brew uninstall gnuplot
 $ brew install gnuplot --with-aquaterm --with-x11
 ```
 
-```
-ex1.m - エクササイズの手順を示すOctave / MATLABスクリプト
-ex1 multi.m - 練習の後半部分のOctave / MATLABスクリプト
-ex1data1.txt - 1つの変数を使用した線形回帰のデータセット
-ex1data2.txt - 複数の変数を使用した線形回帰のデータセット
-submit.m - ソリューションをGoogleのサーバーに送信する送信スクリプト
-[？] warmUpExercise.m - Octave / MATLABの簡単なサンプル関数
-[？] plotData.m - データセットを表示する関数
-[？] computeCost.m - 線形回帰のコストを計算する関数
-[？] gradientDescent.m - グラデーション降下を実行する関数
-[†] computeCostMulti.m - 複数変数のコスト関数
-[†] gradientDescentMulti.m - 複数変数のグラデーションディセント
-[†] featureNormalize.m - フィーチャを正規化する関数
-[†] normalEqn.m - 正規方程式を計算する関数
-```
-
-1. 次元の正方行列を返す関数を作れ
+##### 単特徴の線形回帰
 
 ```
-$ cd machine-leaning-ex1/ex1
-# edit warmUpExercise.m
-$ octave
-$ warmUpExercise
-# check return value
-$ submit
+% load data
+data = load('ex1data1.txt');
+X = data(:, 1);
+y = data(:, 2);
+m = length(y);
+
+% sample data
+% X = rand(m, 1);
+% y = rand(m, 1);
+% m = 10;
+
+% plot data
+plotData(X, y);
+
+% intercept term (X1には1のインターセプト項を挿入する)
+X = [ones(m, 1), data(:,1)];
+
+% theta initialize
+theta = zeros(2, 1);
+
+% ループ回数
+iterations = 1500;
+% 学習率
+alpha = 0.01;
+
+% コストの計算
+% # J = (1 / (2 * m)) * ((h(xi) - yi)^2)
+function J = computeCost(X, y, theta)
+  m = length(y);
+  costs = ((X * theta) - y) .^ 2;
+  J = sum(costs) / (2 * m);
+end
+
+% 最急降下法
+% # repeat until convergence {
+% #   Θj := Θj - (α * (∂ / ∂Θj)) J(θ0, θ1)   (for j = 0 and j = 1)
+% # }
+function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
+  m = length(y);
+  J_history = zeros(num_iters, 1);
+  for iter = 1:num_iters
+    h = X * theta;
+    errors = h - y;
+    delta = X' * errors;
+    theta = theta - (alpha / m) * delta;
+    J_history(iter) = computeCost(X, y, theta);
+  end
+end
+
+theta = gradientDescent(X, y, theta, alpha, iterations);
+
+plot(X(:,2), X*theta, '-')
+legend('Training data', 'Linear regression')
+
+predict1 = [1, 3.5] *theta;
+fprintf('For population = 35,000, we predict a profit of %f\n',...predict1*10000);
+predict2 = [1, 7] * theta;
+fprintf('For population = 70,000, we predict a profit of %f\n',...predict2*10000);
+
+theta0_vals = linspace(-10, 10, 100);
+theta1_vals = linspace(-1, 4, 100);
+
+J_vals = zeros(length(theta0_vals), length(theta1_vals));
+
+for i = 1:length(theta0_vals)
+  for j = 1:length(theta1_vals)
+  t = [theta0_vals(i); theta1_vals(j)];
+  J_vals(i,j) = computeCost(X, y, t);
+  end
+end
+
+J_vals = J_vals';
+figure;
+surf(theta0_vals, theta1_vals, J_vals)
+xlabel('\theta_0');
+ylabel('\theta_1');
+
+figure;
+contour(theta0_vals, theta1_vals, J_vals, logspace(-2, 3, 20))
+xlabel('\theta_0'); ylabel('\theta_1');
+plot(theta(1), theta(2), 'rx', 'MarkerSize', 10, 'LineWidth', 2);
 ```
 
-2. 1つの変数の線形回帰
-
-TODO
+##### 多特徴の線形回帰
 
 ```
+% --- 多特徴の線形回帰 ---
 
+data = load('ex1data2.txt');
+X = data(:, 1:2);
+y = data(:, 3);
+m = length(y);
+
+% 標準偏差
+function [X_norm, mu, sigma] = featureNormalize(X)
+  X_norm = X;
+  numColumns = size(X, 2);
+  mu = mean(X);
+  sigma = std(X);
+  for i = 1:numColumns
+      X_norm(:,i) = (X(:, i) - mu(i)) / sigma(i);
+  end;
+end
+
+% 標準偏差の計算
+[X mu sigma] = featureNormalize(X);
+% intercept term (X1には1のインターセプト項を挿入する)
+X = [ones(m, 1) X];
+
+% 多特徴のコストの計算
+function J = computeCostMulti(X, y, theta)
+  m = length(y); % number of training examples
+  cost = 0;
+  for i = 1:m
+    cost = cost + (theta' * X(i,:)' - y(i))^2;
+  end;
+  J = cost / (2 * m);
+end
+
+% 多特徴の最急降下法
+function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters)
+  m = length(y);
+  J_history = zeros(num_iters, 1);
+  for iter = 1:num_iters
+    h = X * theta;
+    errors = h - y;
+    delta = X' * errors;
+    theta = theta - (alpha / m) * delta;
+    J_history(iter) = computeCostMulti(X, y, theta);
+  end
+end
+
+% 学習率
+alpha = 0.01;
+% ループ回数
+num_iters = 400;
+
+% theta initialize
+theta = zeros(3, 1);
+
+% 多特徴の最急降下
+[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+
+plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+xlabel('Number of iterations');
+ylabel('Cost J');
+
+x = [1 1650 3]';
+price = theta' * x;
+
+fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...'(using gradient descent):\n $%f\n'], price);
+fprintf('Program paused. Press enter to continue.\n');
+
+
+
+% --- 正規方程式 ---
+
+% オレゴン州の[家の広さ,部屋数,価格]
+data = csvread('ex1data2.txt');
+X = data(:, 1:2);
+y = data(:, 3);
+m = length(y);
+
+% intercept term (X1には1のインターセプト項を挿入する)
+X = [ones(m, 1) X];
+
+% 正規方程式
+function [theta] = normalEqn(X, y)
+  theta = pinv(X' * X) * X' * y;
+end
+
+% 正規方程式の計算
+theta = normalEqn(X, y);
+size = 1650
+rooms = 3
+x = [1 size rooms]';
+price = theta' * x;
 ```
+
 
 ## week3
 
