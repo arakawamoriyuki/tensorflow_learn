@@ -882,6 +882,16 @@ a == inv(inv(a))
 
 まぁどちらにせよ、octaveなどのライブラリがpinv関数などを用意しているのでそれを利用するので問題ない。
 
+#### インターセプト項 定数項
+
+data(1, :)に1を代入してベクトル計算する
+
+```
+data = % m*n metrics
+x = data(:,1); % m vector
+X = [ones(m, 1), data(:,1)];
+```
+
 #### クイズ
 
 1. フィーチャースケーリング計算
@@ -1132,7 +1142,7 @@ X = [ones(m, 1) X];
 
 % 多特徴のコストの計算
 function J = computeCostMulti(X, y, theta)
-  m = length(y); % number of training examples
+  m = length(y);
   cost = 0;
   for i = 1:m
     cost = cost + (theta' * X(i,:)' - y(i))^2;
@@ -1194,8 +1204,8 @@ end
 
 % 正規方程式の計算
 theta = normalEqn(X, y);
-size = 1650
-rooms = 3
+size = 1650;
+rooms = 3;
 x = [1 size rooms]';
 price = theta' * x;
 ```
