@@ -1405,9 +1405,44 @@ Cost(hθ(x),y)→∞ if y=0andhθ(x)→1
 Cost(hθ(x),y)→∞ if y=1andhθ(x)→0
 ```
 
+```
+Cost(hθ(x),y)={
+  -log(hθ(x)) if y=1
+  -log(1 - hθ(x)) if y=0
+}
+```
+
 ![y=1図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Q9sX8nnxEeamDApmnD43Fw_1cb67ecfac77b134606532f5caf98ee4_Logistic_regression_cost_function_positive_class.png?expiry=1488672000000&hmac=kpO6JWndQ89kEn_oXaYdUNyEPtUnz6Eq54lC_rxPkNM)
 
 ![y=0図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Ut7vvXnxEead-BJkoDOYOw_f719f2858d78dd66d80c5ec0d8e6b3fa_Logistic_regression_cost_function_negative_class.png?expiry=1488672000000&hmac=9kTQkFn_ElpK_Ws7YOL4J70p1hMXzMvNNcWQmbMKI5U)
+
+hθ(x)(横軸)が1の場合Cost(縦軸)は0で、
+log関数は、hθ(x)が1の場合は0だが、hθ(x)が0に近づくに連れて∞に向かうような線を描く。
+
+hθ(x) = 予測値
+y = 答え
+Cost = 推定が間違っていた場合のペナルティ
+
+例えば
+
+hθ(x) = 1, y = 1
+の場合Cost = 0になる。
+つまり、予測は1で答えも1だった場合にその予測へのペナルティはない事になる。
+
+一方で、
+hθ(x) = 0, y = 1
+の場合、Cost = ∞になる。
+実際に∞のペナルティを与える事はないが、その予測が0である確信が高いにも関わらず間違えた場合に予測へのペナルティは無限大に大きくなる。(∞は特異点なので、hθ(x)=0とかCost=∞になる事はないはず)
+
+実際には
+hθ(x) = 0.9, y = 1
+の場合、ほぼ1だと予測して正解したので、Costは低い実数。('ほぼ'と断定できなかった事へのペナルティ)
+hθ(x) = 0.1, y = 1
+の場合、ほぼ0だと予測したが間違えたのでCostはかなり高い実数。(完全に間違えた事へのペナルティ)
+
+
+- 断定して間違うほどコスト(推定が間違っていた場合のペナルティ)はでかくなる。
+- 疑問として、hθ(x) = 0.5の場合、ペナルティがあんまりない事に違和感(毎回0.5と予測すれば学習できていると勘違いしない？最急降下法をなんどかループさせればhθ(x) = 0.5となる事も減るのか？)
 
 
 
