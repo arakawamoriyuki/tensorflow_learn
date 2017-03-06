@@ -1531,39 +1531,9 @@ one vs all分類、one vs rest分類で分類する事ができる。
 max(hΘ[i](x))
 ```
 
-### クイズ
+### オーバーフィッティング問題(the problem of overfitting)
 
-1.
-hθ(x) = 0.7
-- Our estimate for P(y=1|x;θ) is 0.7.
-- Our estimate for P(y=0|x;θ) is 0.3.
 
-2.
-- 多項式フィーチャーで確率を高められる
-- At the optimal value of θ (e.g., found by fminunc), we will have J(θ)≥0.
-
-3.
-- トランスポーズしない
-- jを使う
-- eを使ってもいい
-
-4.
-- m≥1の場合 J(θ)は0以上
-- yが固定された問題にロジスティック
-- 2クラスは1つの、3クラスは3つの分類機
-- 局所的最適解の為にfminuncを使うわけではない
-
-5.
-θ0=6,θ1=0,θ2=−1
-hΘ(x) = g(Θ0 + Θ1x1 + Θ2x2)
-
-hΘ(x) = g(6 - x2)
-
-y = 1 if 6 - x2 ≧ 0
-y = 0 if 6 - x2 < 0
-
-y = 1 if x2 ≧ 6
-y = 0 if x2 < 6
 
 ----------
 
