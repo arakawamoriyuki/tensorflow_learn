@@ -1484,7 +1484,34 @@ forでもいいが、ベクトル化した計算式はこうなる。
 θ := θ - a/m * X' * (g(XΘ) - y)
 ```
 
+### さらに早いロジスティック回帰のアルゴリズム(advanced optimization)
 
+下記のアルゴリズムは特徴の数が多くなると勾配降下法に変わる早いアルゴリズム。
+ただし、下記の説明はコースの範囲を超える。(何週間も勉強するハメになる)
+ただ、こういうアルゴリズムがあるという事は覚えておいた法がいい。
+
+- 共益勾配法(conjugate gradient)
+- BFGS
+- L-BFGS
+
+上記アルゴリズムの特徴として
+
+- 共通して学習率aを選ぶ必要がない(ラインサーチアルゴリズムという方法でいいレートの学習率を選択してくれる)
+- 最急降下法より早い
+- デメリットとしては、複雑。難しいアルゴリズムで、10年以上使ってきたが、中身まで知ったのはここ2~3年。つまり、中身を知らずとも使うことはできる。自前で実装すべきではない。ライブラリは各言語にあるが、中身がおかしいのもある。使うのであれば多数のライブラリを使って比べるといい。
+
+octaveでは下記のように使用できる。
+
+```
+function [jVal, gradient] = costFunction(theta)
+  jVal = [...code to compute J(theta)...];
+  gradient = [...code to compute derivative of J(theta)...];
+end
+
+options = optimset('GradObj', 'on', 'MaxIter', 100);
+initialTheta = zeros(2,1);
+[optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options);
+```
 
 ----------
 
