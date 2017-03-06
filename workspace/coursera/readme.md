@@ -1213,6 +1213,8 @@ price = theta' * x;
 
 ## week3
 
+[lecture-slides6 pdf](https://d3c33hcgiwev3.cloudfront.net/_964b8d77dc0ee6fd42ac7d8a70c4ffa1_Lecture6.pdf?Expires=1488931200&Signature=PQwvN14QhjjyT2pvzSb8cHYZob6iyu3iL9xMzpbG31xVCiwJpfI0Pwaxtv1JoVeUzN2L83iVQc8g75QDTbiJvsU7hjBnJZ4OUc-5trNMzI3D387Pw5C1Gg5JXYs6ByLO~y-kEtqUGBa5xEpGCvX-7fS4xmXQQFgBO88xAeXtOIU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
 ### 分類
 
 ロジスティック回帰
@@ -1512,6 +1514,56 @@ options = optimset('GradObj', 'on', 'MaxIter', 100);
 initialTheta = zeros(2,1);
 [optTheta, functionVal, exitFlag] = fminunc(@costFunction, initialTheta, options);
 ```
+
+### one vs all分類(one vs all classification)
+
+複数クラス分類方法
+
+天気やメールのフォルダわけなど
+one vs all分類、one vs rest分類で分類する事ができる。
+
+1つ対その他に分けて2クラス分類をする。
+3つの分類の場合、3つの分類機ができる。
+
+その３つの分類機の中からもっとも確度の高い分類が答えとなる。
+
+```
+max(hΘ[i](x))
+```
+
+### クイズ
+
+1.
+hθ(x) = 0.7
+- Our estimate for P(y=1|x;θ) is 0.7.
+- Our estimate for P(y=0|x;θ) is 0.3.
+
+2.
+- 多項式フィーチャーで確率を高められる
+- At the optimal value of θ (e.g., found by fminunc), we will have J(θ)≥0.
+
+3.
+- トランスポーズしない
+- jを使う
+- eを使ってもいい
+
+4.
+- m≥1の場合 J(θ)は0以上
+- yが固定された問題にロジスティック
+- 2クラスは1つの、3クラスは3つの分類機
+- 局所的最適解の為にfminuncを使うわけではない
+
+5.
+θ0=6,θ1=0,θ2=−1
+hΘ(x) = g(Θ0 + Θ1x1 + Θ2x2)
+
+hΘ(x) = g(6 - x2)
+
+y = 1 if 6 - x2 ≧ 0
+y = 0 if 6 - x2 < 0
+
+y = 1 if x2 ≧ 6
+y = 0 if x2 < 6
 
 ----------
 
