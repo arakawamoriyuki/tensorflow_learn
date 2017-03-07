@@ -6,25 +6,51 @@ import requests
 
 from inception_v3 import run_inference_on_image
 
+TMP_IMAGE = '/tmp/inception_tmp.jpg'
+
 inception_app = Bottle()
 
-# @param
-@inception_app.route('/inception')
-def inception():
 
-    default_image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAoZbaD9CYHo5i4Ez5QGf4uHj5pG_Klwu2oEGTipKg8TRr-6pV'
-    source = request.params.url or default_image_url
-    output = '/tmp/inception_tmp.jpg'
+# GETで画像urlを渡して分類を判定する。ContentType:multipart/form-data
+@inception_app.get('/inception')
+def get_inception():
+    # request image url
+    response = requests.get(request.params.image, stream=True)
 
-    response = requests.get(source, stream=True)
-    if response.status_code == 200:
-        with open(output, 'wb') as file:
-            for chunk in response.iter_content(chunk_size=1024):
-                file.write(chunk)
-        result = run_inference_on_image(output)
-        response.content_type = 'application/json'
-        return dumps(result)
-    else:
-        return dumps({'message':'image url could not be loaded'})
+    # save image
+    with open(TMP_IMAGE, 'wb') as file:
+        for chunk in response.iter_content(chunk_size=1024):
+            file.write(chunk)
+
+    # classify image
+    result = run_inference_on_image(TMP_IMAGE)
+
+    response.content_type = 'application/json'
+    return dumps(result)
 
 
+# POSTで画像binaryを渡して分類を判定する。ContentType:multipart/form-data
+@inception_app.post('/inception')
+def post_inception():
+    # request image binary
+    image = request.files.get('image')
+
+    # save image
+    image.save(TMP_IMAGE, overwrite=True, chunk_size=1024)
+
+    # classify image
+    result = run_inference_on_image(TMP_IMAGE)
+
+    response.content_type = 'application/json'
+    return dumps(result)
+
+
+# apiテスト用View
+@inception_app.get('/inception/test')
+def get_inception_test():
+    return '''
+<form action="/inception" method="post" enctype="multipart/form-data">
+    <input type="submit">
+    <input type="file" name="image">
+</form>
+'''

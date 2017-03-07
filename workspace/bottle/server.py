@@ -2,22 +2,24 @@
 import sys
 import os
 from json import dumps
-from bottle import Bottle, response
 
-root_app = Bottle()
+from bottle import Bottle, response, route
 
 # loader
 root = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(root + "/app")
-sys.path.append(root + "/app/lib")
+sys.path.append(root + "/lib")
 
 # load apps
 from inception import inception_app
+
+root_app = Bottle()
 root_app.merge(inception_app)
 
 @root_app.route('/')
 def index():
     response.content_type = 'application/json'
+
     return dumps({
         '/': {
             'GET': {
@@ -25,18 +27,24 @@ def index():
                 'description': 'show api routing'
             }
         },
+        '/inception/test': {
+            'GET':  {
+                'params': {},
+                'description': 'classify image test view'
+            }
+        },
         '/inception': {
             'GET':  {
                 'params': {
-                    'url': 'image url (jpg)'
+                    'image': 'image url (jpg)'
                 },
-                'description': 'classify image url'
+                'description': 'image url classify api'
             },
             'POST': {
                 'params': {
-                    'image': 'image (binary)'
+                    'image': 'image binary (jpg)'
                 },
-                'description': 'classify image binary'
+                'description': 'image binary classify api'
             }
         }
     })
