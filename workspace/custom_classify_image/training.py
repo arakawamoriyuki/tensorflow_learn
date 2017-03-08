@@ -174,7 +174,7 @@ if __name__ == '__main__':
         # データを読み込んで28x28に縮小
         img = cv2.imread(l[0])
         img = cv2.resize(img, (28, 28))
-        # 一列にした後、0~1のfloat値にする
+        # 一列にした後、0~1のfloat値にする(スケーリング)
         train_image.append(img.flatten().astype(np.float32)/255.0)
         # ラベルを1-of-k方式で用意する
         tmp = np.zeros(NUM_CLASSES)

@@ -1625,20 +1625,22 @@ $ python
 
 ## TensorFlow
 
-- 機械学習ライブラリ
+### 用例
 
 [画像分類](https://github.com/tensorflow/models/tree/master/tutorials/image/imagenet)
 [画像分類 inception](https://github.com/tensorflow/models/tree/master/inception/inception)
 
 [画像キャプション](https://github.com/tensorflow/models/tree/master/im2txt)
 
-[自然言語CNN 畳み込みニューラルネットワーク](https://github.com/dennybritz/cnn-text-classification-tf)
 [RNN](https://github.com/tensorflow/models/tree/master/tutorials/rnn)
 [教師なし学習](https://github.com/tensorflow/models/tree/master/tutorials/embedding)
 
-keras-rl
-OpenAiGym
-OpenAiUniverse
+[自然言語CNN 畳み込みニューラルネットワーク](https://github.com/dennybritz/cnn-text-classification-tf)
+[自然言語のベクトル化、計算(word2vec)](https://deepage.net/bigdata/machine_learning/2016/09/02/word2vec_power_of_word_vector.html)
+
+[強化学習DQN(keras-rl)](https://github.com/matthiasplappert/keras-rl)
+[強化学習DQN(OpenAiGym)](https://github.com/openai/gym)
+[強化学習DQN(OpenAiUniverse)](https://github.com/openai/universe)
 
 ### install
 
@@ -1822,6 +1824,12 @@ $ python examples/dqn_cartpole.py
 複数の仮説関数(ノード)にパラメータを通して得られた結果をパラメータとして、
 さらに仮説関数に通していく事で結果をより正しく構成していく。
 1層のノード数を増やしたり、層自体を増やしたりする。
+
+[neural-network-zoo](http://postd.cc/neural-network-zoo/)
+![neuralnetworks](http://www.asimovinstitute.org/wp-content/uploads/2016/09/neuralnetworks.png)
+
+[図](https://qiita-image-store.s3.amazonaws.com/0/52867/2e9812a1-7ab2-5d49-45fd-5070a4a9724f.jpeg)
+[図](https://qiita-image-store.s3.amazonaws.com/0/52867/04b0453e-7486-d225-e492-d86ef2bfe4cf.jpeg)
 
 ### ディープラーニング 深層学習
 
