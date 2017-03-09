@@ -747,7 +747,7 @@ a = 学習率
 
 θi0 = 1で定義していたので新しいアルゴリズムは古いアルゴリズムと似ている、同じという認識。
 
-####フューチャースケーリング
+####フィーチャースケーリング
 
 複数の特徴を最急降下法で分析する場合、それぞれの値の単位を調整すると収束しやすくなる。
 例えば、ctrやimp,clickなど。ctrは1以下の値でclickは大きい数、またimpはそれより100倍近く大きい。
@@ -2096,3 +2096,11 @@ y_i = \sigma(f(x_{0i},x_{1i}))
 ### 行列の全ての要素を足し合わせる関数
 
     tf.reduce_sum(y_*tf.log(y) + (1-y_)*tf.log(1-y))
+
+----------------------------------------
+
+# 参考
+
+- [neural-network-zoo](http://postd.cc/neural-network-zoo/)
+- [word2vec](https://deepage.net/bigdata/machine_learning/2016/09/02/word2vec_power_of_word_vector.html)
+- [octave to numpy](https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html)
