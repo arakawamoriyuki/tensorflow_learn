@@ -1215,6 +1215,8 @@ price = theta' * x;
 
 [lecture-slides6 pdf](https://d3c33hcgiwev3.cloudfront.net/_964b8d77dc0ee6fd42ac7d8a70c4ffa1_Lecture6.pdf?Expires=1488931200&Signature=PQwvN14QhjjyT2pvzSb8cHYZob6iyu3iL9xMzpbG31xVCiwJpfI0Pwaxtv1JoVeUzN2L83iVQc8g75QDTbiJvsU7hjBnJZ4OUc-5trNMzI3D387Pw5C1Gg5JXYs6ByLO~y-kEtqUGBa5xEpGCvX-7fS4xmXQQFgBO88xAeXtOIU_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
 
+[lecture-slides7 pdf](https://d3c33hcgiwev3.cloudfront.net/_7d030d67103ce0e7f39dee1d7f78525c_Lecture7.pdf?Expires=1489363200&Signature=MOqd8cMOlT9c-Td4fh-lS8dMETNeXHHBv1sLdvq6ZJgT94L5NQ3q4Rz0f2YUOifVovKou1~6IE7tAfqpC5HwmTRve0djLk-Npo9VTcwBJG5D0twDJPG4Cex9EPIXdP1WErIEW4tqvGoGPo68Rw5k2fZTTwybLJpOz0BuE3M8K80_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
 ### 分類
 
 ロジスティック回帰
@@ -1588,6 +1590,74 @@ minθ 12m [∑mi=1(hθ(x(i))−y(i))2+λ ∑nj=1θ2j]
 
 この正規化パラメータ（ラムダ）は後半で自動的に選択できるようになる。
 
+
+### 線形回帰の正規化
+
+線形回帰の正規化は普段の線形回帰のθ1からθnまでに
+λ/m＊θjを足す。
+θ0は特別で、足さない。
+
+```
+repeat {
+  Θj := Θj - (a*sum( ((hΘ(xi) - yi) * xij) + (λ/m*θj))
+}
+```
+
+```
+repeat {
+  Θj := Θj(1 - (a*(λ/m))) - (a*(λ/m))*sum( (hΘ(xi) - yi) * xij))
+}
+```
+
+ここで、下記は0.99などの1よりほんの少し小さい値になる。
+```
+1 - (a*(λ/m))
+```
+
+### 正規方程式の正規化
+
+```
+θ = ((X'X + λ*L)**-1) * X'y
+
+while L =[0
+            1
+              1
+                ...
+                  1]
+```
+
+ここでのLはm+1の逆行列メトリクスで、要素1-1が0のメトリクスになる。
+
+[参照](https://www.coursera.org/learn/machine-learning/supplement/pKAsc/regularized-linear-regression)
+
+
+#### 非可逆性について(advancedな内容)
+
+m(トレーニングセットの数) <= n(特徴の数)
+
+の場合
+
+X' (Xのインバース)
+
+はシンギュラー行列（特異行列）とか、縮退行列と呼ばれる行列になる可能性(かなり低い)がある。
+
+octaveのpinv関数は縮退行列に関してよきに計らって値を返してくれる。
+octaveのinv関数はネイティブなインバース。
+他の言語(pythonやtensorflow)でやる時にはその辺注意する。
+
+
+### ロジスティック回帰の正規化
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Od9mobDaEeaCrQqTpeD5ng_4f5e9c71d1aa285c1152ed4262f019c1_Screenshot-2016-11-22-09.31.21.png?expiry=1489363200000&hmac=sGod8A43T7YYXHiMgnnukOYRnB3fJiOduzr_m4U8A_E)
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/dfHLC70SEea4MxKdJPaTxA_306de28804a7467f7d84da0fe3ee9c7b_Screen-Shot-2016-12-07-at-10.49.02-PM.png?expiry=1489363200000&hmac=SJaGMZox2Zyd2xY5maHB0RWBeEZVhWbkpNBcT5GbYCw)
+
+
+## week4
+
+### Motivations
+### Neural Networks
+### Applications
 
 
 ----------
