@@ -3,6 +3,7 @@
 /gym/*
 /universe/*
 /keras-rl/*
+/tensorflow/*
 /models/*
 /pydata_okinawa2017/*
 /workspace/.ipynb_checkpoints/*
