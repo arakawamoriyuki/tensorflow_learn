@@ -4,4 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+# --- ニューラルネットワークで分類 ---
+# 手書き文字分類
+
 # TODO
