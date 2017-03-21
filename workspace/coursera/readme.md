@@ -1655,6 +1655,8 @@ octaveのinv関数はネイティブなインバース。
 
 ## week4
 
+[lecture-slides8 pdf](https://d3c33hcgiwev3.cloudfront.net/_48018e8190fedff87b572550690056d2_Lecture8.pdf?Expires=1490227200&Signature=YvA0-ZjN8vDnfz9OdOKZHtr95dRsa2dh2zhqk9jB4wODRpl~yNClANC7u~1Cqa6MiCiU63U~QASJvNj6~z5RzhKKmY-mpPjTo9FyhczjyDK5yWES0vgo7uJdS-atrOteCsByle1Qjm1qWP-wNv~1wGI1-7ErZCLJqqwW9xF5n~o_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
 ### Motivations ニューラルネットワークに対するモチベーション
 
 これまではフィーチャーの少ない分類や回帰を行なってきたが、フィーチャーが多くなるにつれて多項式がθの二乗割る2で複雑になっていく。
@@ -1766,7 +1768,57 @@ hθ(x) = a<3> = g(z<3>)
 [一連の計算式](https://www.coursera.org/learn/machine-learning/supplement/YlEVx/model-representation-ii)
 
 
-### Applications
+### ニューラルネットワークの具体例
+
+論理積andとその真理値表を使ったニューラルネットワークの例
+
+バイアスのパラメータが-30
+x1が20
+x2が20
+の場合、
+-30 + (x1 × 20) + (x2 × 20)
+になるので、両方1でなければ0以上を返せず、論理積になる。
+
+バイアスのパラメータが-10
+x1が20
+x2が20
+の場合、
+-10 + (x1 × 20) + (x2 × 20)
+になるので、両方1もしくは片方1の場合に0以上を返すので論理和となる。
+
+![OR回路](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/f_ueJLGnEea3qApInhZCFg_a5ff8edc62c9a09900eae075e8502e34_Screenshot-2016-11-23-10.03.48.png?expiry=1490227200000&hmac=Addo3fvQpW1Icn5JzkSON5o-dUxitYiFBV3JknAsXIo)
+
+バイアスのパラメータが10
+x1が-20
+の場合
+否定(not)になる。
+
+バイアスの重みが10で
+x1が-20
+x2が-20
+の場合、両方0の場合に1を返す否定積？(not and not)になる。
+
+
+これら3つの回路を利用して、排他的論理和を作る。
+線では決定境界を描けない非線形なデータでも排他的論理和を使えば可能になる。
+
+論理積と否定積から得た値を論理和に通すことで排他的論理和が可能。
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/rag_zbGqEeaSmhJaoV5QvA_52c04a987dcb692da8979a2198f3d8d7_Screenshot-2016-11-23-10.28.41.png?expiry=1490227200000&hmac=QwQnJtUXHYB8S3lA8EdFMY90xLgvVbYGJhW459vYazI)
+
+### ニューラルネットワークを用いた分類
+
+以前教えた1 vs allの応用になる。
+人、車、バイク、トラックを分類する場合、出力レイヤーに4つのレイヤーを持つようにする。
+
+y= 4vector = [1 0 0 0] = 人！
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/9Aeo6bGtEea4MxKdJPaTxA_4febc7ec9ac9dd0e4309bd1778171d36_Screenshot-2016-11-23-10.49.05.png?expiry=1490227200000&hmac=XYr2ka_Dq-4lW72ES0er5oAYlpZosDAGTLAOnyWn5uA)
+
+
+## week5
+
+
 
 
 ----------
