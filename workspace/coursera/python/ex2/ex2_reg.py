@@ -4,31 +4,8 @@ import numpy as np
 from matplotlib import pyplot as plot
 from scipy import optimize
 
-# from ex2 import plot_data, cost_function, predict
+from ex2 import plot_data, cost_function, predict
 
-
-def plot_data(X, y, show=True):
-    pos = y.nonzero()[0]
-    neg = (y == 0).nonzero()[0]
-    plot.plot(X[pos, 0], X[pos, 1], 'k+', markersize=7, linewidth=2)
-    plot.plot(X[neg, 0], X[neg, 1], 'ko', markerfacecolor='y', markersize=7, linewidth=2)
-    plot.xlabel('Exam 1 score')
-    plot.ylabel('Exam 2 score')
-    if show:
-        plot.show()
-
-def sigmoid(x):
-    return 1.0 / (1.0 + np.exp(-x))
-
-def cost_function(theta, X, y):
-    m = X.shape[0]
-    h = sigmoid(X.dot(theta))
-    cost = sum(-y * np.log(h) - (1.0 - y) * np.log(1.0 - h))
-    grad = X.T.dot(h - y)
-    return (cost / m, grad / m)
-
-def predict(theta, X):
-    return sigmoid(X.dot(theta)) >= 0.5
 
 def map_feature(X1, X2, degree=6):
     """
@@ -55,7 +32,7 @@ def cost_function_reg(theta, X, y, lambda_):
 
 
 if __name__ == '__main__':
-    data1 = np.loadtxt('../../machine-learning-ex2/ex2/ex2data2.txt', delimiter=',')
+    data1 = np.loadtxt('../../octave/mlclass-ex2/ex2data2.txt', delimiter=',')
     X_original = X = data1[:, 0:2]
     y = data1[:, 2]
     plot_data(X, y)
