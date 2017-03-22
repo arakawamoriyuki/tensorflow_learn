@@ -88,7 +88,7 @@ def dataset3_params(X, y, Xval, yval):
 
 
 if __name__ == '__main__':
-    data = loadmat('../../octave/mlclass-ex6/ex6data1.mat')
+    data = loadmat('../../machine-learning-ex6/ex6/ex6data1.mat')
     X = np.require(data['X'], dtype=np.float64, requirements='C_CONTIGUOUS')
     y = np.require(data['y'].flatten(), dtype=np.float64)
     plot_data(X, y)
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     print('Gaussian Kernel between x1 = [1; 2; 1], x2 = [0; 4; -1], sigma = 0.5: %f' % value)
     print('(this value should be about 0.324652)')
     # dataset 2
-    data = loadmat('../../octave/mlclass-ex6/ex6data2.mat')
+    data = loadmat('../../machine-learning-ex6/ex6/ex6data2.mat')
     X = np.require(data['X'], dtype=np.float64, requirements='C_CONTIGUOUS')
     y = np.require(data['y'].flatten(), dtype=np.float64)
     plot_data(X, y)
@@ -115,7 +115,7 @@ if __name__ == '__main__':
     model = libsvm.fit(X, y, kernel='rbf', C=C, gamma=gamma)
     visualize_boundary(X, y, model, gamma)
     # dataset 3
-    data = loadmat('../../octave/mlclass-ex6/ex6data3.mat')
+    data = loadmat('../../machine-learning-ex6/ex6/ex6data3.mat')
     X = np.require(data['X'], dtype=np.float64, requirements='C_CONTIGUOUS')
     y = np.require(data['y'].flatten(), dtype=np.float64)
     Xval = np.require(data['Xval'], dtype=np.float64, requirements='C_CONTIGUOUS')

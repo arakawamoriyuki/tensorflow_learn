@@ -86,7 +86,7 @@ def predict_one_vs_all(theta, X):
 
 
 if __name__ == '__main__':
-    data = loadmat('../../octave/mlclass-ex3/ex3data1.mat')
+    data = loadmat('../../machine-learning-ex3/ex3/ex3data1.mat')
     X = data['X']
     y = data['y'].flatten()
     sel = np.random.permutation(X)[:100]

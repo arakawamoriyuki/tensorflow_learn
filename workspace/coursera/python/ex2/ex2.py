@@ -33,7 +33,7 @@ def predict(theta, X):
 
 
 if __name__ == '__main__':
-    data1 = np.loadtxt('../../octave/mlclass-ex2/ex2data1.txt', delimiter=',')
+    data1 = np.loadtxt('../../machine-learning-ex2/ex2/ex2data1.txt', delimiter=',')
     X = data1[:, 0:2]
     y = data1[:, 2]
     plot_data(X, y)

@@ -32,7 +32,7 @@ def cost_function_reg(theta, X, y, lambda_):
 
 
 if __name__ == '__main__':
-    data1 = np.loadtxt('../../octave/mlclass-ex2/ex2data2.txt', delimiter=',')
+    data1 = np.loadtxt('../../machine-learning-ex2/ex2/ex2data2.txt', delimiter=',')
     X_original = X = data1[:, 0:2]
     y = data1[:, 2]
     plot_data(X, y)

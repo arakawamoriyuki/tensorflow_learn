@@ -103,7 +103,7 @@ def validation_curve(X, y, Xval, yval):
 
 if __name__ == '__main__':
     print('Loading and Visualizing Data ...')
-    data = loadmat('../../octave/mlclass-ex5/ex5data1.mat')
+    data = loadmat('../../machine-learning-ex5/ex5/ex5data1.mat')
     X = data['X']
     y = data['y'].flatten()
     Xval = data['Xval']

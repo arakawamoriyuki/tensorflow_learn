@@ -75,7 +75,7 @@ def nn_cost_function_vectorized(nn_params, input_layer_size, hidden_layer_size, 
     Theta1_grad = 1/m*Delta1 + Theta1_reg
     Theta2_grad = 1/m*Delta2 + Theta2_reg
     gradient = np.concatenate((Theta1_grad.flatten('C'), Theta2_grad.flatten('C')))
-    
+
     return J, gradient
 
 
@@ -168,13 +168,13 @@ def predict(Theta1, Theta2, X):
 
 if __name__ == '__main__':
     print('Loading and Visualizing Data ...')
-    data = loadmat('../../octave/mlclass-ex4/ex4data1.mat')
+    data = loadmat('../../machine-learning-ex4/ex4/ex4data1.mat')
     X = data['X']
     y = data['y'].flatten()
     sel = np.random.permutation(X)[:100]
     #display_data(sel)
     print('Loading Saved Neural Network Parameters ...')
-    weights = loadmat('../../octave/mlclass-ex4/ex4weights.mat')
+    weights = loadmat('../../machine-learning-ex4/ex4/ex4weights.mat')
     Theta1 = weights['Theta1']
     Theta2 = weights['Theta2']
     m = X.shape[0]

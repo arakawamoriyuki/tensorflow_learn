@@ -35,7 +35,7 @@ def gradient_descent(X, y, theta, alpha, num_iters):
 
 
 if __name__ == '__main__':
-    data1 = np.loadtxt('../../octave/ex1/ex1data1.txt', delimiter=',')
+    data1 = np.loadtxt('../../machine-learning-ex1/ex1/ex1data1.txt', delimiter=',')
     X = data1[:,0]
     y = data1[:,1]
     m = y.size
