@@ -13,7 +13,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # data = load('ex1data2.txt');
 # data = load('./machine-learning-ex1/ex1/ex1data2.txt');
 data = []
-for line in open('./machine-learning-ex1/ex1/ex1data2.txt', 'r'):
+for line in open('../../machine-learning-ex1/ex1/ex1data2.txt', 'r'):
     splits = line.strip().split(',')
     x1 = splits[0]
     x2 = splits[1]
@@ -140,7 +140,7 @@ print("最急降下法: 広さ{size}で{rooms}部屋の家売値予測値は{pri
 # --- 正規方程式での計算方法(Normal equation) ---
 
 data = []
-for line in open('./machine-learning-ex1/ex1/ex1data2.txt', 'r'):
+for line in open('../../machine-learning-ex1/ex1/ex1data2.txt', 'r'):
     splits = line.strip().split(',')
     x1 = splits[0]
     x2 = splits[1]

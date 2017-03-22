@@ -13,7 +13,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # data = load('ex1data1.txt');
 # data = load('./machine-learning-ex1/ex1/ex1data1.txt');
 data = []
-for line in open('./machine-learning-ex1/ex1/ex1data1.txt', 'r'):
+for line in open('../../machine-learning-ex1/ex1/ex1data1.txt', 'r'):
     splits = line.strip().split(',')
     x = splits[0]
     y = splits[1]
