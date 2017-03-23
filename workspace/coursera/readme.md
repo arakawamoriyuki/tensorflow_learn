@@ -1818,6 +1818,69 @@ y= 4vector = [1 0 0 0] = 人！
 
 ## week5
 
+### ニューラルネットワーク コスト関数
+
+L = ニューラルネットワークのレイヤー数
+l = レイヤーインデックス
+s = ユニット(ノード)数
+sl = lで指定されたレイヤーのユニット数(バイアスユニットは含めない)
+K = sL = 出力レイヤーのユニット数
+
+- バイナリ分類(0or1)
+出力レイヤーのユニット数は1、sL = K = 1
+
+- マルチクラス分類(K classes)
+出力レイヤーのユニット数は3以上、K = sL >= 3
+
+#### ニューラルネットワークのコスト関数
+
+```
+hθ(x) = k vector
+(hθ(x))i = i th output
+j(θ) = ...
+```
+
+```
+J(Θ)=−1m∑i=1m∑k=1K[y(i)klog((hΘ(x(i)))k)+(1−y(i)k)log(1−(hΘ(x(i)))k)]+λ2m∑l=1L−1∑i=1sl∑j=1sl+1(Θ(l)j,i)2
+```
+
+[式の参考](https://www.coursera.org/learn/machine-learning/supplement/afqGa/cost-function)
+
+### バックプロバケーションアルゴリズム
+
+コスト関数を最小化するアルゴリズム
+
+トレーニングデータが1個しかない例で説明、単にxとyだけ。
+
+1. フォワードプロバケーションで前方に計算した値を渡していく。
+
+![フォワードプロバケーション](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/bYLgwteoEeaX9Qr89uJd1A_73f280ff78695f84ae512f19acfa29a3_Screenshot-2017-01-10-18.16.50.png?expiry=1490400000000&hmac=lbjXqEqUeuOIcK6p8RPsnAv5QjPmIsPsn0n49n5H1cY)
+
+2. バックプロバケーションでデルタ項を計算する。
+
+lは上付き添字として、jは下付き添字として、δj<l>と表す。それは、レイヤーlのj番目のユニット。デルタは誤差を表す。
+アルファは入力、デルタは誤差。
+
+[バックプロバケーション](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Ul6i5teoEea1UArqXEX_3g_a36fb24a11c744d7552f0fecf2fdd752_Screenshot-2017-01-10-17.13.27.png?expiry=1490400000000&hmac=axo4-vrhOUVGU4LBIDOLWGUG25gDY0UZHRniShrInGk)
+
+```
+δ = α - y
+
+δ(誤差) = α(コスト関数が出した値) - y(答え)
+α = h(x)なので、コスト関数が出したコスト関数値がどれだけ間違っているかの値がデルタ。
+```
+
+```
+g′(z(l))=a(l) .∗ (1−a(l))
+```
+
+△ = Δ = 大文字のデルタ
+
+[式の参考](https://www.coursera.org/learn/machine-learning/supplement/pjdBA/backpropagation-algorithm)
+
+
+
+
 
 
 
