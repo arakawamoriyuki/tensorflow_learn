@@ -21,6 +21,8 @@
 /workspace/ml_1b/workspace/data/*
 /workspace/mnist/MNIST_data/*
 
+token.mat
+
 **/__pycache__/*
 
 *.pyc
