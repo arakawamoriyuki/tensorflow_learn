@@ -1818,6 +1818,8 @@ y= 4vector = [1 0 0 0] = 人！
 
 ## week5
 
+[lecture-slides9 pdf](https://d3c33hcgiwev3.cloudfront.net/_1afdf5a2e2e24350ec9bad90aefd19fe_Lecture9.pdf?Expires=1490486400&Signature=F0Ub0Dgk2ohOyfruipYanrXw~AZOssM~eGJmvwNj7SyyYfODGFBugTYaf2zwWgqrYJmJJ4k3tksySHqNlcXUblcCQsi5aMH8wCNyqQKHmSDG~GSFZhZ9V4uduxj6iFuZ-yw5P6avb6ZZe9bpPCpgrauzTTZFVOkvdqAvg0l~N0w_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A)
+
 ### ニューラルネットワーク コスト関数
 
 L = ニューラルネットワークのレイヤー数
@@ -2059,9 +2061,12 @@ for i = 1:m,
 
 ### Application of Neural Networks
 
-#### autonomous-driving
+[自動運転の資料動画](https://www.coursera.org/learn/machine-learning/lecture/zYS8T/autonomous-driving)
 
 
+## week6
+
+[lecture-slides10 pdf]()
 
 
 
