@@ -1937,7 +1937,7 @@ cost(t)=y(t) log(hΘ(x(t)))+(1−y(t)) log(1−hΘ(x(t)))
 ![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/qc309rdcEea4MxKdJPaTxA_324034f1a3c3a3be8e7c6cfca90d3445_fixx.png?expiry=1490486400000&hmac=u84nJNffSEiv5yL-GWHo7yS0AYHbdQNhvabMjcRI3Jc)
 
 
-### バックプロバケーションの実際 Backpropagation in Practice
+### バックプロバケーションの実装 Backpropagation in Practice
 
 #### アンロールパラメータ Unrolling Parameters
 
@@ -1972,6 +1972,46 @@ Theta1 = reshape(thetaVector(1:110),10,11)
 Theta2 = reshape(thetaVector(111:220),10,11)
 Theta3 = reshape(thetaVector(221:231),1,11)
 ```
+
+#### Gradient Checking
+
+バックプロパゲーションはデバッグしづらい。
+小さなバグがあったとしてもコスト関数は最小を目指し、正常に動いてるように見えてしまう。
+しかし、その小さなバグがない実装と比べると性能は劣ってしまう。
+グラディエントチェッキング(Gradient Checking)というテクニックを使って
+その問題を駆逐する方法を学ぶ。
+
+
+- グラディエントチェッキングのアイディア
+
+凸型のコスト関数グラフがあったとして、その少しずれた左右をとり、その二つを結んだ線を描く。
+その線とthetaの傾きは近似しているはず。
+
+```
+theta + ε(エプシロン)
+theta - ε(エプシロン)
+```
+
+- チェック実行手順
+
+1. Dを計算してベクトル化する
+2. Dvecとエプシロンを計算した値を比較して小数点2~3桁で近似である事を確認する
+3. 確信を持って実際にトレーニング開始する前にそのチェックをはずす事(遅くなる)
+
+octaveでの実装
+```
+epsilon = 1e-4;
+for i = 1:n,
+  thetaPlus = theta;
+  thetaPlus(i) += epsilon;
+  thetaMinus = theta;
+  thetaMinus(i) -= epsilon;
+  gradApprox(i) = (J(thetaPlus) - J(thetaMinus))/(2*epsilon)
+end;
+```
+
+#### Random Initialization
+
 
 
 
