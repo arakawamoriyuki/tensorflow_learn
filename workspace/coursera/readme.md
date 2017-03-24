@@ -1827,6 +1827,56 @@ y= 4vector = [1 0 0 0] = 人！
 ----------------------------------------
 # Tips
 
+## 手法
+
+- 分類 (Classification)
+
+  + SVM (サポートベクトルマシン、線形サポートベクトルマシン)
+汎化性能が高く、カーネル関数を選択できるのでさまざまなデータに対応できます。
+
+  + K 近傍法
+単純なわりに高い精度を誇ります。
+
+  + ランダムフォレスト
+過学習を考慮しなくてよい、並列計算しやすいといった特長があります。
+
+- 回帰 (Regression)
+
+  + 回帰
+普通の線形回帰です。
+
+  + ラッソ回帰
+少ない変数でモデルを作るが、使わない変数があることを仮定しています。
+
+  + リッジ回帰
+多重共線性の影響を受けにくく、ラッソ回帰より変数選択力が弱いという特長があります。
+
+  + SVR
+カーネルで非線形性を取りこむことができます。
+
+- クラスタリング
+
+  + K 平均法 (KMeans)
+クラスタの数を k 個とあらかじめ指定する代表的なクラスタリング手法です。単純で高速に動作します。
+
+  + 混合ガウス分布 (GMM)
+クラスタの所属確率を求めることができます。正規分布を仮定します。
+
+  + 平均変位法 (MeanShift)
+
+カーネル密度推定を用いたロバストでノンパラメトリックな手法です。設定するカーネル幅 (半径 h ) によって自動的にクラスタの数が決まります。入力点群すべてに対して最急降下法の原理を用いて半径 h の円を考え中心点を計算するのでコストが高くなりがちです。
+画像のセグメンテーション、エッジ保存の画像の平滑化といった場面にも応用される手法です。
+カーネル幅 h を無限大にしたミーンシフトクラスタ解析が k 平均法であると解釈することもできます。
+
+- 次元削減 (Dimensional Reduction)
+
+  + 主成分分析 (PCA)
+疎行列も扱え速いという特長があります。正規分布を仮定します。
+
+  + 非負値行列因子分解 (NMF)
+非負行列のみ使えますが、より特徴を抽出しやすいこともあります。
+その他に線形判別 (LDA) や Deep Learning なども使えます。
+
 ## Anaconda in Python
 
 [参考](http://qiita.com/t2y/items/2a3eb58103e85d8064b6)
@@ -1931,6 +1981,7 @@ $ python
 ### install
 
 詳しくは[ここ](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/get_started/os_setup.md#anaconda-installation)
+[TF_PYTHON_URL](https://www.tensorflow.org/install/install_mac#TF_PYTHON_URL)
 
 ```
 # とりあえずsystem pipとかanaconda pipでinstallしてしまっていたら消しておく。
@@ -1948,6 +1999,7 @@ $ source activate tensorflow
 
 # anaconda環境でグローバル環境に対して?tensorflowをinstall
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl # githubを参照！！ Mac OS X, CPU only, Python 2.7
+$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.1-py3-none-any.whl # githubを参照！！ Mac OS X, CPU only, Python 3.4~
 $ pip install --ignore-installed --upgrade $TF_BINARY_URL
 $ python
 >> import tensorflow as tf
