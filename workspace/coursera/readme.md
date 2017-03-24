@@ -1878,9 +1878,100 @@ g′(z(l))=a(l) .∗ (1−a(l))
 
 [式の参考](https://www.coursera.org/learn/machine-learning/supplement/pjdBA/backpropagation-algorithm)
 
+### バックプロバケーションの直感 Backpropagation Intuition
+
+バックプロバケーションが何をしているか深くまで知る必要はない。
+実装方法さえわかればブラックボックスでもよく働く。
+
+もう少し直感的に、実装よりにフォワードプロパゲーションとバックプロバケーションを紐解く。
+
+#### フォワードプロパゲーション
+
+下記のニューラルネットワークがある
+
+1層目(入力層)ノード2個
+2層目(中間層)ノード2個
+3層目(中間層)ノード2個
+4層目(出力層)ノード1個
+
+- 3層目の2個目のノードの計算例
+
+```
+x1<3> = (Θ10<2> * 1) + (Θ11<2> * a1<2>) + (Θ12<2> * a1<2>)
+
+3層目の2個目のノード =
+  (theta[1][0] * バイアス) +
+  (theta[1][1] * 3層目の1個目のノード) +
+  (theta[1][2] * 3層目の2個目のノード)
+```
+
+バックプロバケーションも似たような仕組み、計算方法
+
+#### バックプロバケーション
+
+```
+cost(t)=y(t) log(hΘ(x(t)))+(1−y(t)) log(1−hΘ(x(t)))
+```
+
+- 出力層の誤差
+
+```
+δ1<4> = y<i> - a1<4>
+出力層の誤差 = トレーニングセットの答え - コスト関数が出した値
+```
+
+- 2層目の2個目のノードの誤差
+
+```
+δ2<2> = (theta12<3> * δ1<3>) + (theta22<3> * δ2<3>)
+
+2層目の2個目のノードの誤差 =
+  (theta[1][1] * 3層目の1個目のノードの誤差) +
+  (theta[1][2] * 3層目の2個目のノードの誤差)
+```
+
+ここで、バイアスの誤差は計算に入れない点に注意。
+バイアスの誤差を計算している資料もあるが、バイアスは基本的に必ず1なので
+誤差を計算して修正する必要がないから。
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/qc309rdcEea4MxKdJPaTxA_324034f1a3c3a3be8e7c6cfca90d3445_fixx.png?expiry=1490486400000&hmac=u84nJNffSEiv5yL-GWHo7yS0AYHbdQNhvabMjcRI3Jc)
 
 
+### バックプロバケーションの実際 Backpropagation in Practice
 
+#### アンロールパラメータ Unrolling Parameters
+
+アンロール = theta、deltaを1つのvectorにまとめる事。
+ニューラルネットワークを計算する関数を実行する際、
+ほとんどの場合、thetaやdeltaを1つのベクトルに変換して引数で渡す。
+
+
+thetaはニューラルネットワークを使う場合、行列ごとに持つ事になる。
+また、デルタ(誤差)もネットワーク数に応じて増える。
+4つの層があるのであれば、1~3まで。
+
+```
+L=4
+const Theta1, Theta2, Theta3
+const D1, D2, D3
+```
+
+入力と中間層が10個のノードを持ち、出力は1個のノードの場合
+```
+s1=10,s2=10,s3=1
+```
+
+octaveでの実装例
+```
+% Theta1~3 & D1~3 = 10x11 metrics(10層x10層+バイアス)
+% theta、deltaを1つのvectorにまとめる
+thetaVector = [ Theta1(:); Theta2(:); Theta3(:); ]
+deltaVector = [ D1(:); D2(:); D3(:) ]
+% 層ごとの値の取り出し
+Theta1 = reshape(thetaVector(1:110),10,11)
+Theta2 = reshape(thetaVector(111:220),10,11)
+Theta3 = reshape(thetaVector(221:231),1,11)
+```
 
 
 
