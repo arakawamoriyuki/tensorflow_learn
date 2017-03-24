@@ -2012,6 +2012,37 @@ end;
 
 #### Random Initialization
 
+トレーニングを開始する際にパラメータthetaをランダムに初期化する。
+今まで(ロジスティック回帰など)は初期化に0を使っていたが、
+__ニューラルネットワークではうまくいかない。__
+
+うまくいかない理由としては、2層目のノードに値を渡す際、
+全て0であれば、全てのノードで同じ値になってしまい、誤差も同じになる。
+つまり、学習ができない。
+
+octaveでの実装
+```
+% ここでのINIT_EPSILONはグラディエントチェッキングのエプシロンと無関係！
+% ランダム値は-INIT_EPSILON ~ +INIT_EPSILONの範囲におさまる
+% If the dimensions of Theta1 is 10x11, Theta2 is 10x11 and Theta3 is 1x11.
+Theta1 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta2 = rand(10,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
+```
+
+#### Putting it Together
+
+```
+for i = 1:m,
+  Perform forward propagation and backpropagation using example (x(i),y(i))
+  (Get activations a(l) and delta terms d(l) for l = 2,...,L
+```
+
+![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/hGk18LsaEea7TQ6MHcgMPA_8de173808f362583eb39cdd0c89ef43e_Screen-Shot-2016-12-05-at-10.40.35-AM.png?expiry=1490486400000&hmac=seM8U1nt9bTbbtuMmXQ8g53ZHndlwDB-62ag84mpYxc)
+
+
+
+
 
 
 
