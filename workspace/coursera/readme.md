@@ -2032,6 +2032,23 @@ Theta3 = rand(1,11) * (2 * INIT_EPSILON) - INIT_EPSILON;
 
 #### Putting it Together
 
+全てを踏まえたニューラルネットワークの実装方法
+
+- ニューラルネットワークアーキテクチャの選択
+入力層の数はトレーニングデータの特徴数
+出力層の数は回帰であれば1個、分類であればその分類数
+中間層は基本的に1層、中間層を増やすのであれば、中間層のノード数は同じにする。
+中間層の数は精度と時間的なコストを考えて剪定する。
+
+- ニューラルネットワークのトレーニング手順
+1. weights(theta)を0付近の小さな値でランダム初期化する。
+2. フォワードプロパゲーションの実装
+3. コスト関数J(Θ)の実装
+4. バックプロパゲーションの実装
+5. グラディエントチェッキングの実装、確認、チェックをはずす。
+6. 最急降下法や最適化関数などを使用して、thetaを最小にする。
+
+
 ```
 for i = 1:m,
   Perform forward propagation and backpropagation using example (x(i),y(i))
@@ -2040,7 +2057,9 @@ for i = 1:m,
 
 ![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/hGk18LsaEea7TQ6MHcgMPA_8de173808f362583eb39cdd0c89ef43e_Screen-Shot-2016-12-05-at-10.40.35-AM.png?expiry=1490486400000&hmac=seM8U1nt9bTbbtuMmXQ8g53ZHndlwDB-62ag84mpYxc)
 
+### Application of Neural Networks
 
+#### autonomous-driving
 
 
 
