@@ -22,6 +22,7 @@
 /workspace/mnist/MNIST_data/*
 
 token.mat
+octave-workspace
 
 **/__pycache__/*
 
