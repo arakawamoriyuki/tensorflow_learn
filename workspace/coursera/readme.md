@@ -2223,6 +2223,7 @@ Python 2.7.11
 
 ```
 # anaconda環境前提
+anaconda3(python3.6)が現状対応してない。python~3.5まで。。
 $ conda install -c https://conda.anaconda.org/menpo opencv3
 $ python
 >>> import cv2
