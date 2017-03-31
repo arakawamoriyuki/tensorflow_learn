@@ -1853,7 +1853,7 @@ J(Θ)=−1m∑i=1m∑k=1K[y(i)klog((hΘ(x(i)))k)+(1−y(i)k)log(1−(hΘ(x(i)))k
 
 [式の参考](https://www.coursera.org/learn/machine-learning/supplement/afqGa/cost-function)
 
-### バックプロバケーションアルゴリズム
+### バックプロパゲーションアルゴリズム
 
 コスト関数を最小化するアルゴリズム
 
@@ -1863,12 +1863,12 @@ J(Θ)=−1m∑i=1m∑k=1K[y(i)klog((hΘ(x(i)))k)+(1−y(i)k)log(1−(hΘ(x(i)))k
 
 ![フォワードプロバケーション](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/bYLgwteoEeaX9Qr89uJd1A_73f280ff78695f84ae512f19acfa29a3_Screenshot-2017-01-10-18.16.50.png?expiry=1490400000000&hmac=lbjXqEqUeuOIcK6p8RPsnAv5QjPmIsPsn0n49n5H1cY)
 
-2. バックプロバケーションでデルタ項を計算する。
+2. バックプロパゲーションでデルタ項を計算する。
 
 lは上付き添字として、jは下付き添字として、δj<l>と表す。それは、レイヤーlのj番目のユニット。デルタは誤差を表す。
 アルファは入力、デルタは誤差。
 
-[バックプロバケーション](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Ul6i5teoEea1UArqXEX_3g_a36fb24a11c744d7552f0fecf2fdd752_Screenshot-2017-01-10-17.13.27.png?expiry=1490400000000&hmac=axo4-vrhOUVGU4LBIDOLWGUG25gDY0UZHRniShrInGk)
+[バックプロパゲーション](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/Ul6i5teoEea1UArqXEX_3g_a36fb24a11c744d7552f0fecf2fdd752_Screenshot-2017-01-10-17.13.27.png?expiry=1490400000000&hmac=axo4-vrhOUVGU4LBIDOLWGUG25gDY0UZHRniShrInGk)
 
 ```
 δ = α - y
@@ -1885,12 +1885,12 @@ g′(z(l))=a(l) .∗ (1−a(l))
 
 [式の参考](https://www.coursera.org/learn/machine-learning/supplement/pjdBA/backpropagation-algorithm)
 
-### バックプロバケーションの直感 Backpropagation Intuition
+### バックプロパゲーションの直感 Backpropagation Intuition
 
-バックプロバケーションが何をしているか深くまで知る必要はない。
+バックプロパゲーションが何をしているか深くまで知る必要はない。
 実装方法さえわかればブラックボックスでもよく働く。
 
-もう少し直感的に、実装よりにフォワードプロパゲーションとバックプロバケーションを紐解く。
+もう少し直感的に、実装よりにフォワードプロパゲーションとバックプロパゲーションを紐解く。
 
 #### フォワードプロパゲーション
 
@@ -1912,9 +1912,9 @@ x1<3> = (Θ10<2> * 1) + (Θ11<2> * a1<2>) + (Θ12<2> * a1<2>)
   (theta[1][2] * 3層目の2個目のノード)
 ```
 
-バックプロバケーションも似たような仕組み、計算方法
+バックプロパゲーションも似たような仕組み、計算方法
 
-#### バックプロバケーション
+#### バックプロパゲーション
 
 ```
 cost(t)=y(t) log(hΘ(x(t)))+(1−y(t)) log(1−hΘ(x(t)))
@@ -1944,7 +1944,7 @@ cost(t)=y(t) log(hΘ(x(t)))+(1−y(t)) log(1−hΘ(x(t)))
 ![図](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/qc309rdcEea4MxKdJPaTxA_324034f1a3c3a3be8e7c6cfca90d3445_fixx.png?expiry=1490486400000&hmac=u84nJNffSEiv5yL-GWHo7yS0AYHbdQNhvabMjcRI3Jc)
 
 
-### バックプロバケーションの実装 Backpropagation in Practice
+### バックプロパゲーションの実装 Backpropagation in Practice
 
 #### アンロールパラメータ Unrolling Parameters
 
