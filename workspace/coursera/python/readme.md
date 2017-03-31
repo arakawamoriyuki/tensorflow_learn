@@ -2,7 +2,5 @@
 
 ```
 git clone https://github.com/zsiciarz/ml-coursera.git/python
-mv ml-coursera/python/* ./
-rm -rf ml-coursera
-pip install requirements.txt
+git clone https://github.com/danielch01/Machine-Learning-Coursera-Tensorflow.git
 ```

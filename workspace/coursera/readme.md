@@ -2158,61 +2158,27 @@ for i = 1:m,
 - condaで仮想環境管理も可(virtualenv/venの代わり)
 
 
-1. [anaconda](https://www.continuum.io/downloads#osx)公式からGUI(もしくはCUI)でインストール
-
-2. インストールした場所によるが(試した際はユーザーにインストール出来なかった)、インストールすると下記にnumpyなど機械学習に必要な環境が作られる。
-
-```
-/anaconda
-```
+1. install pyenv
+2. install python environments
 
 ```
-$ /anaconda/bin/python --version
-Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
-$ /anaconda/bin/pip list | grep numpy      # condaでパッケージ管理するのでpip入ってはいるけどconda通したほうが良い
+pyenv install anaconda3-4.2.0 = python 3.6
+pyenv install anaconda3-2.5.0 = python 3.5
+pyenv install anaconda2-4.2.0 = python 2.7
+```
+
+3. install python environments
+
+pyenv global anaconda2-4.2.0
+```
+$ pyenv global anaconda3-2.5.0
+Python 3.5.1 :: Anaconda 2.5.0 (x86_64)
+$ pip list | grep numpy      # condaでパッケージ管理するのでpip入ってはいるけどconda通したほうが良い
 numpy (1.11.3)
 numpydoc (0.6.0)
 $ /anaconda/bin/conda list | grep numpy
 numpy                     1.11.3                   py27_0
 numpydoc                  0.6.0                    py27_0
-```
-
-3. 現system環境と競合(pythonコマンドなど)するので使いたいときだけPATH通したほうが良い。
-
-```
-$ vi ~/.zshrc
-```
-
-```
-## path functions
-#
-path_append ()  { path_remove $1; export PATH="$PATH:$1"; }
-path_prepend () { path_remove $1; export PATH="$1:$PATH"; }
-path_remove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }
-
-~~~
-
-## anaconda
-#
-ANACONDA_PATH = /anaconda/bin
-anaconda_active () {
-  path_prepend $ANACONDA_PATH
-}
-anaconda_deactive () {
-  path_remove $ANACONDA_PATH
-}
-```
-
-```
-$ python --version
-Python 2.7.11
-$ source ~/.zshrc
-$ anaconda_active
-$ python --version
-Python 2.7.13 :: Anaconda 4.3.0 (x86_64)
-$ anaconda_deactive
-$ python --version
-Python 2.7.11
 ```
 
 ## OpenCV cv2
@@ -2249,6 +2215,9 @@ $ python
 [強化学習DQN(keras-rl)](https://github.com/matthiasplappert/keras-rl)
 [強化学習DQN(OpenAiGym)](https://github.com/openai/gym)
 [強化学習DQN(OpenAiUniverse)](https://github.com/openai/universe)
+
+[追加学習(sequential learning)](http://wired.jp/2017/03/27/deepmind-sequential-memory/)
+
 
 ### install
 
