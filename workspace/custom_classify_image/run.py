@@ -103,10 +103,10 @@ if __name__ == '__main__':
 
         scores = logits.eval(feed_dict={images_placeholder: [test_image[i]], keep_prob: 1.0 })[0]
         for index, score in enumerate(scores):
-            print index, score
+            print('index:{}, score:{}'.format(index, score))
         max_index = np.argmax(scores)
         max_score = np.max(scores)
-        print 'max index: {} ({})'.format(max_index, max_score)
+        print('max index: {} ({})'.format(max_index, max_score))
 
 
 

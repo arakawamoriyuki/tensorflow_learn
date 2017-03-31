@@ -247,7 +247,7 @@ if __name__ == '__main__':
 
         # 訓練の実行
         for step in range(FLAGS.max_steps):
-            for i in range(len(train_image)/FLAGS.batch_size):
+            for i in range(int(len(train_image)/FLAGS.batch_size)):
                 # batch_size分の画像に対して訓練の実行
                 batch = FLAGS.batch_size*i
                 # feed_dictでplaceholderに入れるデータを指定する
