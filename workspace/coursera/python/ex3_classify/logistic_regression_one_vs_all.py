@@ -95,55 +95,6 @@ def predict_one_vs_all(theta, X):
     """
     return 1 + np.argmax(sigmoid(X.dot(theta.T)), axis=1)
 
-
-# if __name__ == '__main__':
-#     # データのロード、変数の初期化
-#     # .mat =
-#     #   Microsoft Access table shortcut file?
-#     #   画像のグレースケールpixel値の2次配列
-#     #   サンプル数 = 5000
-#     #   分類数 = 10(0 ~ 9)
-#     #   1画像 = 20x20 = 400pixel = 特徴数400
-#     data = loadmat('../../machine-learning-ex3/ex3/ex3data1.mat')
-#
-#     # 8割はトレーニング、2割はテスト用に使う
-#     percentage_train = 0.8
-#     train_data_count = data['X'].shape[0] * percentage_train
-#     X = data['X'][:int(train_data_count)]
-#     y = data['y'][:int(train_data_count)].flatten()
-#     m = X.shape[0]
-#     num_labels = len(list(set(y)))
-#
-#     # テストデータ
-#     test_X = data['X'][int(train_data_count):]
-#     test_y = data['y'][int(train_data_count):].flatten()
-#     test_m = test_X.shape[0]
-#
-#     # .matファイルのサンプルからランダムに100個可視化
-#     # sel = np.random.permutation(X)[:100]
-#     # display_data(sel)
-#
-#     # インターセプト項の挿入
-#     X = np.concatenate((np.ones((m, 1)), X), axis=1)
-#     test_X = np.concatenate((np.ones((test_m, 1)), test_X), axis=1)
-#
-#     # トレーニング
-#     #   λ(ラムダ) = 正規化パラメータ
-#     #     if lambda > 1?: ペナルティー上昇、0に近づき直線化、アンダーフィッティング
-#     #     if lambda < 1?: ペナルティー下降、1に近づき曲線化、オーバーフィッティング
-#     _lambda = 1
-#     # トレーニング回数
-#     batch_count = 50
-#     all_theta = one_vs_all(X, y, num_labels, _lambda, batch_count=batch_count)
-#
-#     # 予測の実行
-#     predictions = predict_one_vs_all(all_theta, test_X)
-#
-#     # 精度の出力
-#     accuracy = 100 * np.mean(predictions == test_y)
-#     print('accuracy(精度): %0.2f %%' % accuracy)
-
-
 if __name__ == '__main__':
     # データのロード、変数の初期化
     # .mat =
