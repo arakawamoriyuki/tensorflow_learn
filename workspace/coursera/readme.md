@@ -2524,6 +2524,68 @@ h(x) = 1 / 1 + exp(-x)
 ステップ関数はプロットすると階段のように、0か1の値が返される。
 シグモイド関数は0か1ではなく、少数を含むなめらかな勾配の値が返される。
 
+### 目的関数(活性化関数)の種類
+
+#### 中間層の活性化関数
+
+- ステップ関数 = 0 or 1
+- シグモイド関数 = なめらかな曲線
+- ReLU関数 = 0以下なら0、0以上ならそのまま
+
+#### 出力層の活性化関数
+
+- 恒等関数 = そのままreturn = 回帰で利用
+- シグモイド関数 = なめらかな曲線 = 2値分類で利用
+- ソフトマックス関数 = 他クラス分類で利用
+
+### ニューラルネットワークの実装
+
+```
+# シグモイド関数(活性化関数)
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# 恒等関数(回帰における出力層の活性化関数)
+def identity_function(x):
+    return x
+
+# ソフトマックス関数(他クラス分類における出力層の活性化関数)
+def softmax(x):
+    if x.ndim == 2:
+        x = x.T
+        x = x - np.max(x, axis=0)
+        y = np.exp(x) / np.sum(np.exp(x), axis=0)
+        return y.T
+    x = x - np.max(x) # オーバーフロー対策
+    return np.exp(x) / np.sum(np.exp(x))
+
+# ニューラルネットワーク
+def init_network():
+    network = {}
+    network['W1'] = np.array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
+    ... const b1,W2,b2,W3,b3
+    return network
+
+# フォワードプロパゲーション
+def forward(network, x):
+    w1, w2, w3 = network['W1'], network['W2'], network['W3']
+    b1, b2, b3 = network['b1'], network['b2'], network['b3']
+    a1 = np.dot(x, w1) + b1
+    z1 = sigmoid(a1)
+    a2 = np.dot(z1, w2) + b2
+    z2 = sigmoid(a2)
+    a3 = np.dot(z2, w3) + b3
+
+    y = identity_function(a3) # 回帰の場合
+    # y = softmax(a3) # 他クラス分類の場合
+
+    return y
+
+network = init_network()
+x = np.array([1,0, 0.5])
+y = forward(network, x)
+```
+
 ----------------------------------------
 # TensorFlow Tutorialの数学的背景
 [TensorFlow Tutorialの数学的背景](http://enakai00.hatenablog.com/entry/2016/02/29/121321)
