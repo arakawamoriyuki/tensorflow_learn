@@ -2310,6 +2310,9 @@ $ source activate tensorflow
 # anaconda環境でグローバル環境に対して?tensorflowをinstall
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.0-py2-none-any.whl # githubを参照！！ Mac OS X, CPU only, Python 2.7
 $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.0.1-py3-none-any.whl # githubを参照！！ Mac OS X, CPU only, Python 3.4~
+
+$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.1.0rc1-py3-none-any.whl # tensorflow v1.1.0rc1
+
 $ pip install --ignore-installed --upgrade $TF_BINARY_URL
 $ python
 >> import tensorflow as tf
