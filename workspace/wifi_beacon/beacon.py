@@ -6,7 +6,7 @@ from beacon.model import get_model, save_model
 
 def sampling(**kwargs):
     X, y = fetch_datasets(label=kwargs['label'], size=kwargs['size'])
-    save_datasets(X, y, path=kwargs['path'])
+    save_datasets(X, y, path=kwargs['datasets_path'])
     training(model_path=kwargs['model_path'], datasets_path=kwargs['datasets_path'])
 
 def training(**kwargs):
@@ -18,16 +18,22 @@ def training(**kwargs):
 def predict(**kwargs):
     X, _ = fetch_datasets(size=1)
     model = get_model(path=kwargs['model_path'])
-    return model.predict(X[0])[0]
+    result = model.predict(X[0])[0]
+    print(result)
+    return result
 
 def percentage(**kwargs):
     X, _ = fetch_datasets(size=1)
     model = get_model(path=kwargs['model_path'])
-    return {x: y for x, y in zip(model.classes_, model.predict_proba(X[0])[0])}
+    result = {x: y for x, y in zip(model.classes_, model.predict_proba(X[0])[0])}
+    print(result)
+    return result
 
 def labels(**kwargs):
     model = get_model(path=kwargs['model_path'])
-    return model.classes_
+    result = model.classes_
+    print(result)
+    return result
 
 
 def main(args):

@@ -6,7 +6,8 @@ def fetch_datasets(label='default place', size=1):
     X = []
     y = []
     wifi_scanner = get_scanner()
-    for _ in range(size):
+    for index in range(int(size)):
+        print('scan ' + str(index) + ' access points')
         access_points = wifi_scanner.get_access_points()
         X.append({' '.join([ap.ssid, ap.bssid]): ap.quality for ap in access_points })
         y.append(label)
