@@ -1,10 +1,12 @@
 
+/deep-photo-styletransfer/*
 /go-vncdriver/*
 /gym/*
 /universe/*
 /keras-rl/*
 /tensorflow/*
 /models/*
+/sonnet/*
 /pydata_okinawa2017/*
 /workspace/.ipynb_checkpoints/*
 /workspace/classify_image/images/*
