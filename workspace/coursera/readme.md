@@ -2453,6 +2453,28 @@ $ cd keras-rl
 $ python examples/dqn_cartpole.py
 ```
 
+## sonnet
+
+```
+$ brew upgrade bazel
+$ bazel version
+Build label: 0.4.5-homebrew
+
+$ git clone --recursive https://github.com/deepmind/sonnet
+$ cd sonnet/tensorflow
+$ ./configure
+$ cd ../
+
+$ mkdir /tmp/sonnet
+$ bazel build --config=opt :install
+$ ./bazel-bin/install /tmp/sonnet
+
+```
+
+
+
+
+
 ----------------------------------------
 # TensorFlowで学ぶディープラーニング入門
 

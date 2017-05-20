@@ -4,10 +4,13 @@
 /gym/*
 /universe/*
 /keras-rl/*
+/keras/*
 /tensorflow/*
 /models/*
 /sonnet/*
 /pydata_okinawa2017/*
+/meetup024/*
+
 /workspace/.ipynb_checkpoints/*
 /workspace/classify_image/images/*
 /workspace/custom_classify_image/images/*
