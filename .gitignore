@@ -8,6 +8,8 @@
 /models/*
 /sonnet/*
 /pydata_okinawa2017/*
+
+
 /workspace/.ipynb_checkpoints/*
 /workspace/classify_image/images/*
 /workspace/custom_classify_image/images/*
@@ -27,6 +29,5 @@ token.mat
 octave-workspace
 
 **/__pycache__/*
-
 *.pyc
 .DS_Store
